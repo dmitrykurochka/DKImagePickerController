@@ -32,8 +32,11 @@ It's a Facebook style Image Picker Controller by Swift. It uses [DKCamera][DKCam
 DKImagePickerController is available on CocoaPods. Simply add the following line to your podfile:
 
 ```ruby
-# For latest release in cocoapods
-pod 'DKImagePickerController'
+# For Source
+source 'https://github.com/practo/practo-specs.git'
+
+# For stable release in cocoapods
+pod 'DKImagePickerController', '~>3.3.5'
 ```
 
 #### iOS 7.x
@@ -271,6 +274,9 @@ If you want to add new language, pull request or issue!
 You can merge your branch into the `develop` branch. Any Pull Requests to be welcome!!!
 
 ## Change Log
+## [3.3.5](https://github.com/practo/DKImagePickerController/tree/3.3.5) (2016-08-25)
+
+- Fixed Silly bug with photo permissions being asked even when camera was loaded
 
 ## [3.3.3](https://github.com/zhangao0086/DKImagePickerController/tree/3.3.3) (2016-08-08)
 
