@@ -254,7 +254,9 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 		}
 		
 		self.hidesCamera = self.imagePickerController.sourceType == .Photo
-		self.checkPhotoPermission()
+		if self.hidesCamera {
+			self.checkPhotoPermission()
+		}
     }
 	
 	override func viewDidLayoutSubviews() {
