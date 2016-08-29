@@ -131,9 +131,6 @@ public class DKImagePickerController : UINavigationController {
 	/// Selection for display and dismiss animation
 	public var shouldDisplayDismissAnimatedly = true
 
-	/// Selection for numbers on selected cells in gallery
-	public var shouldDisplayNumbersOnSelectedCells = true
-
 	/// Selection numbers startValue on selected cells in gallery
 	public var displayedCellNumbersShouldStartFrom: Int = 0
 

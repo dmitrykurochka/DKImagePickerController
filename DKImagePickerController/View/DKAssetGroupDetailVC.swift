@@ -368,7 +368,6 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 		
 		if let index = self.imagePickerController.selectedAssets.indexOf(asset) {
 			cell.selected = true
-			cell.checkView.checkLabel.hidden = !self.imagePickerController.shouldDisplayNumbersOnSelectedCells
 			cell.checkView.checkLabel.text = "\(index + 1 + self.imagePickerController.displayedCellNumbersShouldStartFrom)"
 			self.collectionView!.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
 		} else {
