@@ -130,7 +130,16 @@ public class DKImagePickerController : UINavigationController {
 
 	/// Selection for display and dismiss animation
 	public var shouldDisplayDismissAnimatedly = true
-		
+
+	/// Selection for numbers on selected cells in gallery
+	public var shouldDisplayNumbersOnSelectedCells = true
+
+	/// Selection numbers startValue on selected cells in gallery
+	public var displayedCellNumbersShouldStartFrom: Int = 0
+
+	/// Optional Alert message string when max limit reached
+	public var maxSelectedLocalizedMessage: String? = nil
+
     /// The maximum count of assets which the user will be able to select.
     public var maxSelectableCount = 999
 	

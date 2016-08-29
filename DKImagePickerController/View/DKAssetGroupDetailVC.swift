@@ -368,7 +368,8 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 		
 		if let index = self.imagePickerController.selectedAssets.indexOf(asset) {
 			cell.selected = true
-			cell.checkView.checkLabel.text = "\(index + 1)"
+			cell.checkView.checkLabel.hidden = !self.imagePickerController.shouldDisplayNumbersOnSelectedCells
+			cell.checkView.checkLabel.text = "\(index + 1 + self.imagePickerController.displayedCellNumbersShouldStartFrom)"
 			self.collectionView!.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
 		} else {
 			cell.selected = false
@@ -421,7 +422,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 		self.imagePickerController.selectImage(selectedAsset!)
         
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? DKAssetCell {
-            cell.checkView.checkLabel.text = "\(self.imagePickerController.selectedAssets.count)"
+            cell.checkView.checkLabel.text = "\(self.imagePickerController.selectedAssets.count + self.imagePickerController.displayedCellNumbersShouldStartFrom)"
         }
     }
     
