@@ -36,7 +36,7 @@ DKImagePickerController is available on CocoaPods. Simply add the following line
 source 'https://github.com/practo/practo-specs.git'
 
 # For stable release in cocoapods
-pod 'DKImagePickerController', '~>3.3.5'
+pod 'DKImagePickerController', '~>3.3.6'
 ```
 
 #### iOS 7.x
@@ -274,6 +274,10 @@ If you want to add new language, pull request or issue!
 You can merge your branch into the `develop` branch. Any Pull Requests to be welcome!!!
 
 ## Change Log
+## [3.3.6](https://github.com/practo/DKImagePickerController/tree/3.3.6) (2016-08-25)
+
+- Possibly Fixed irritating issue with specs
+
 ## [3.3.5](https://github.com/practo/DKImagePickerController/tree/3.3.5) (2016-08-25)
 
 - Fixed Silly bug with photo permissions being asked even when camera was loaded
