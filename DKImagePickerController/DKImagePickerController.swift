@@ -258,28 +258,35 @@ public class DKImagePickerController : UINavigationController {
 	private var hasInitialized = false
 	override public func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		
 		if !hasInitialized {
 			hasInitialized = true
-			
+
 			if self.sourceType == .Camera {
+
+				view.backgroundColor = UIColor.clearColor()
+				view.alpha = 0.0
+				let dispatchDelta = Int64(1.0 * Double(NSEC_PER_SEC))
+				let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, dispatchDelta)
+				dispatch_after(dispatchTime, dispatch_get_main_queue()) { () -> Void in
+					self.view.alpha = 1.0
+				}
+
 				self.navigationBarHidden = true
 				
 				let camera = self.createCamera()
 				if camera is UINavigationController {
-					self.presentViewController(self.createCamera(), animated: shouldDisplayDismissAnimatedly, completion: nil)
-					self.setViewControllers([], animated: false)
+					self.presentViewController(camera, animated: animated, completion: nil)
+					self.setViewControllers([], animated: animated)
 				} else {
-					self.setViewControllers([camera], animated: false)
+					self.setViewControllers([camera], animated: animated)
 				}
 			} else {
                 self.navigationBarHidden = false
 				let rootVC = DKAssetGroupDetailVC()
 				rootVC.imagePickerController = self
-                
 				self.UIDelegate.prepareLayout(self, vc: rootVC)
 				self.updateCancelButtonForVC(rootVC)
-				self.setViewControllers([rootVC], animated: false)
+				self.setViewControllers([rootVC], animated: animated)
 				if self.defaultSelectedAssets?.count > 0 {
 					self.UIDelegate.imagePickerController(self, didSelectAssets: [self.defaultSelectedAssets!.last!])
 				}
