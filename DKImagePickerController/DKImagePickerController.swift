@@ -276,9 +276,9 @@ public class DKImagePickerController : UINavigationController {
 				let camera = self.createCamera()
 				if camera is UINavigationController {
 					self.presentViewController(camera, animated: animated, completion: nil)
-					self.setViewControllers([], animated: animated)
+					self.setViewControllers([], animated: false)
 				} else {
-					self.setViewControllers([camera], animated: animated)
+					self.setViewControllers([camera], animated: false)
 				}
 			} else {
                 self.navigationBarHidden = false
@@ -286,7 +286,7 @@ public class DKImagePickerController : UINavigationController {
 				rootVC.imagePickerController = self
 				self.UIDelegate.prepareLayout(self, vc: rootVC)
 				self.updateCancelButtonForVC(rootVC)
-				self.setViewControllers([rootVC], animated: animated)
+				self.setViewControllers([rootVC], animated: false)
 				if self.defaultSelectedAssets?.count > 0 {
 					self.UIDelegate.imagePickerController(self, didSelectAssets: [self.defaultSelectedAssets!.last!])
 				}
