@@ -1,4 +1,16 @@
+
 # Change Log
+## [3.3.7](https://github.com/zhangao0086/DKImagePickerController/tree/3.3.7) (2016-08-30)
+
+- Fixed Lots of weird stuff
+
+## [3.3.6](https://github.com/practo/DKImagePickerController/tree/3.3.6) (2016-08-25)
+
+- Possibly Fixed irritating issue with specs
+
+## [3.3.5](https://github.com/practo/DKImagePickerController/tree/3.3.5) (2016-08-25)
+
+- Fixed Silly bug with photo permissions being asked even when camera was loaded
 
 ## [3.3.4](https://github.com/zhangao0086/DKImagePickerController/tree/3.3.4) (2016-08-16)
 
