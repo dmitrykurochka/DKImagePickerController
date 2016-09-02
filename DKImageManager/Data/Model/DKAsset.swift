@@ -124,7 +124,11 @@ public class DKAsset: NSObject {
 		options.synchronous = sync
 		
 		getImageManager().fetchImageDataForAsset(self, options: options, completeBlock: { (data, info) in
-			let image = UIImage(data: data!)
+			guard let imageData = data else {
+				completeBlock(image: nil, info: info)
+				return
+			}
+			let image = UIImage(data: imageData)
 			completeBlock(image: image, info: info)
 		})
 	}
