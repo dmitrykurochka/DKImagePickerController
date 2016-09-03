@@ -306,10 +306,23 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 		self.title = group.groupName
 		
 		let groupsCount = getImageManager().groupDataManager.groupIds?.count
-		self.selectGroupButton.setTitle(group.groupName + (groupsCount > 1 ? "  \u{25be}" : "" ), forState: .Normal)
+		if let attrTitle = self.imagePickerController.attributedTitleForGroup?(group.groupName) where groupsCount > 0 {
+
+			let attributedTitle = NSMutableAttributedString(attributedString: attrTitle)
+
+			let globalTitleColor = UINavigationBar.appearance().titleTextAttributes?[NSForegroundColorAttributeName] as? UIColor ?? UIColor.blackColor()
+
+			attributedTitle.addAttribute(NSForegroundColorAttributeName, value: globalTitleColor, range: NSMakeRange(0, attributedTitle.length))
+
+			self.selectGroupButton.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping;
+			self.selectGroupButton.titleLabel?.textAlignment = NSTextAlignment.Center;
+			self.selectGroupButton.setAttributedTitle(attributedTitle, forState: .Normal)
+		} else {
+			self.selectGroupButton.setTitle(group.groupName + (groupsCount > 1 ? " \u{25be}" : "" ), forState: .Normal)
+		}
 		self.selectGroupButton.sizeToFit()
 		self.selectGroupButton.enabled = groupsCount > 1
-		
+
 		self.navigationItem.titleView = self.selectGroupButton
 	}
     

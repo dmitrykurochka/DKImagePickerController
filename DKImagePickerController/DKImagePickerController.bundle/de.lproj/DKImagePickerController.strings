@@ -26,6 +26,8 @@
 
 "done" = "Fertig";
 
+"cancel" = "Stornieren";
+
 "maxLimitReached" = "Maximale Bilderanzahl erreicht";
 
 "maxLimitReachedMessage" = "Sie können nur %ld Fotos auswählen";

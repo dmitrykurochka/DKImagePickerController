@@ -26,6 +26,8 @@
 
 "done" = "Готово";
 
+"cancel" = "Отмена";
+
 "maxLimitReached" = "Достигнут лимит фото";
 
 "maxLimitReachedMessage" = "Вы можете выбрать %ld фото";

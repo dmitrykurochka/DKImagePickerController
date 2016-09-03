@@ -125,6 +125,8 @@ public class DKImagePickerController : UINavigationController {
 		return DKImagePickerControllerDefaultUIDelegate()
 	}()
 
+	public var attributedTitleForGroup: ((String)->(NSAttributedString?))? = nil
+
     /// Forces selection of tapped image immediatly.
 	public var singleSelect = false
 

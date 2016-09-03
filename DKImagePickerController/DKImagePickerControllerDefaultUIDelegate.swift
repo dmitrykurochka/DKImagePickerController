@@ -12,17 +12,19 @@ import UIKit
 public class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerControllerUIDelegate {
 	
 	public weak var imagePickerController: DKImagePickerController!
-	
-	public lazy var doneButton: UIButton = {
+	public weak var parentNavItem: UINavigationItem!
+
+	public lazy var doneButton: UIBarButtonItem = {
 		return self.createDoneButton()
 	}()
-	
-	public func createDoneButton() -> UIButton {
-		let button = UIButton(type: UIButtonType.Custom)
-		button.setTitleColor(UINavigationBar.appearance().tintColor ?? self.imagePickerController.navigationBar.tintColor, forState: UIControlState.Normal)
-		button.addTarget(self.imagePickerController, action: #selector(DKImagePickerController.done), forControlEvents: UIControlEvents.TouchUpInside)
-		self.updateDoneButtonTitle(button)
-		
+
+	public func createCancelButton() -> UIBarButtonItem {
+		return UIBarButtonItem(barButtonSystemItem: .Cancel, target: self.imagePickerController, action: #selector(DKImagePickerController.dismiss))
+	}
+
+	public func createDoneButton() -> UIBarButtonItem {
+		let doneButtonTitle = self.doneButtonTitle()
+		let button = UIBarButtonItem(title: doneButtonTitle, style: UIBarButtonItemStyle.Done, target: self.imagePickerController, action: #selector(DKImagePickerController.done))
 		return button
 	}
 	
@@ -30,7 +32,8 @@ public class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCo
 	
 	public func prepareLayout(imagePickerController: DKImagePickerController, vc: UIViewController) {
 		self.imagePickerController = imagePickerController
-		vc.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.doneButton)
+		self.parentNavItem = vc.navigationItem
+		updateDoneButtonTitle(self.doneButton)
 	}
 	
 	public func imagePickerControllerCreateCamera(imagePickerController: DKImagePickerController,
@@ -59,9 +62,7 @@ public class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCo
 	
 	public func imagePickerController(imagePickerController: DKImagePickerController,
 	                                  showsCancelButtonForVC vc: UIViewController) {
-		vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel,
-		                                                      target: imagePickerController,
-		                                                      action: #selector(DKImagePickerController.dismiss))
+		vc.navigationItem.leftBarButtonItem = createCancelButton()
 	}
 	
 	public func imagePickerController(imagePickerController: DKImagePickerController,
@@ -137,15 +138,17 @@ public class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCo
 			granted ? setup() : cameraDenied()
 		}
 	}
-	
-	public func updateDoneButtonTitle(button: UIButton) {
+
+	public func updateDoneButtonTitle(button: UIBarButtonItem) {
+		self.parentNavItem?.rightBarButtonItem = self.createDoneButton()
+	}
+
+	public func doneButtonTitle() -> String {
 		if self.imagePickerController.selectedAssets.count > 0 {
-			button.setTitle(String(format: DKImageLocalizedStringWithKey("select"), self.imagePickerController.selectedAssets.count), forState: UIControlState.Normal)
+			return String(format: DKImageLocalizedStringWithKey("select"), self.imagePickerController.selectedAssets.count)
 		} else {
-			button.setTitle(DKImageLocalizedStringWithKey("done"), forState: UIControlState.Normal)
+			return DKImageLocalizedStringWithKey("done")
 		}
-		
-		button.sizeToFit()
 	}
 	
 }

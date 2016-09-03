@@ -26,6 +26,8 @@
 
 "done" = "Tamam";
 
+"cancel" = "İptal";
+
 "maxLimitReached" = "Maksimum fotoğraf limitine ulaştınız.";
 
 "maxLimitReachedMessage" = "%ld fotoğraf seçebilirsiniz.";

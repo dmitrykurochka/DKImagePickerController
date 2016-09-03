@@ -26,6 +26,8 @@
 
 "done" = "Kész";
 
+"cancel" = "Megszünteti";
+
 "maxLimitReached" = "Max fotók Elérte a";
 
 "maxLimitReachedMessage" = "Megadhatja %ld fotók";

@@ -26,6 +26,8 @@
 
 "done" = "Done";
 
+"cancel" = "Cancel";
+
 "maxLimitReached" = "Max photos limit reached";
 
 "maxLimitReachedMessage" = "You can select %ld items";

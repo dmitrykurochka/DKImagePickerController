@@ -26,6 +26,8 @@
 
 "done" = "完成";
 
+"cancel" = "取消";
+
 "maxLimitReached" = "最大数限制";
 
 "maxLimitReachedMessage" = "你能选择%ld项";

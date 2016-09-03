@@ -26,6 +26,8 @@
 
 "done" = "مکمل کریں";
 
+"cancel" = "منسوخ کریں";
+
 "maxLimitReached" = "تصاویر کی مقررہ تعداد پوری ہوگئی";
 
 "maxLimitReachedMessage" = "آپ %ld تصاویر منتخب کر سکتے ہیں";
