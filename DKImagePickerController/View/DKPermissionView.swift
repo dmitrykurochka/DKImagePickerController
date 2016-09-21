@@ -28,8 +28,8 @@ internal class DKPermissionView: UIView {
 		}
 		permissionView.titleLabel.sizeToFit()
 		
-		permissionView.permitButton.setTitle(DKImageLocalizedStringWithKey("permit"), for: UIControlState())
-		permissionView.permitButton.setTitleColor(UIColor(red: 0, green: 122.0 / 255, blue: 1, alpha: 1), for: UIControlState())
+		permissionView.permitButton.setTitle(DKImageLocalizedStringWithKey("permit"), for: .normal)
+		permissionView.permitButton.setTitleColor(UIColor(red: 0, green: 122.0 / 255, blue: 1, alpha: 1), for: .normal)
 		permissionView.permitButton.addTarget(permissionView, action: #selector(DKPermissionView.gotoSettings), for: .touchUpInside)
 		permissionView.permitButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
 		permissionView.permitButton.sizeToFit()

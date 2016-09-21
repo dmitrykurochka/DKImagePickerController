@@ -10,8 +10,8 @@ import Photos
 
 open class DKBaseManager: NSObject {
 
-	fileprivate let observers = NSHashTable.weakObjects()
-	
+	private let observers = NSHashTable<AnyObject>.weakObjects()
+
 	open func addObserver(_ object: AnyObject) {
 		self.observers.add(object)
 	}
@@ -27,9 +27,9 @@ open class DKBaseManager: NSObject {
 	open func notifyObserversWithSelector(_ selector: Selector, object: AnyObject?, objectTwo: AnyObject?) {
 		if self.observers.count > 0 {
 			DispatchQueue.main.async(execute: { () -> Void in
-				for observer in self.observers.objectEnumerator() {
+				for observer in self.observers.allObjects {
 					if observer.responds(to: selector) {
-						observer.perform(selector, with: object, with: objectTwo)
+						_ = observer.perform(selector, with: object, with: objectTwo)
 					}
 				}
 			})
@@ -44,7 +44,7 @@ public func getImageManager() -> DKImageManager {
 
 open class DKImageManager: DKBaseManager {
 	
-	open class func checkPhotoPermission(_ handler: @escaping (_ granted: Bool) -> Void) {
+	public class func checkPhotoPermission(_ handler: @escaping (_ granted: Bool) -> Void) {
 		func hasPhotoPermission() -> Bool {
 			return PHPhotoLibrary.authorizationStatus() == .authorized
 		}
@@ -62,8 +62,8 @@ open class DKImageManager: DKBaseManager {
 	}
 	
 	static let sharedInstance = DKImageManager()
-	
-	fileprivate let manager = PHCachingImageManager.default()
+
+	private let manager = PHCachingImageManager.default()
 	
 	fileprivate lazy var defaultImageRequestOptions: PHImageRequestOptions = {
 		let options = PHImageRequestOptions()
@@ -88,19 +88,19 @@ open class DKImageManager: DKBaseManager {
 		self.groupDataManager.invalidate()
 	}
 	
-	open func fetchImageForAsset(_ asset: DKAsset, size: CGSize, completeBlock: @escaping (_ image: UIImage?, _ info: [AnyHashable: Any]?) -> Void) {
+	public func fetchImageForAsset(_ asset: DKAsset, size: CGSize, completeBlock: @escaping (_ image: UIImage?, _ info: [AnyHashable: Any]?) -> Void) {
 		self.fetchImageForAsset(asset, size: size, options: nil, completeBlock: completeBlock)
 	}
 	
-	open func fetchImageForAsset(_ asset: DKAsset, size: CGSize, contentMode: PHImageContentMode, completeBlock: @escaping (_ image: UIImage?, _ info: [AnyHashable: Any]?) -> Void) {
+	public func fetchImageForAsset(_ asset: DKAsset, size: CGSize, contentMode: PHImageContentMode, completeBlock: @escaping (_ image: UIImage?, _ info: [AnyHashable: Any]?) -> Void) {
 			self.fetchImageForAsset(asset, size: size, options: nil, contentMode: contentMode, completeBlock: completeBlock)
 	}
 
-	open func fetchImageForAsset(_ asset: DKAsset, size: CGSize, options: PHImageRequestOptions?, completeBlock: @escaping (_ image: UIImage?, _ info: [AnyHashable: Any]?) -> Void) {
+	public func fetchImageForAsset(_ asset: DKAsset, size: CGSize, options: PHImageRequestOptions?, completeBlock: @escaping (_ image: UIImage?, _ info: [AnyHashable: Any]?) -> Void) {
 		self.fetchImageForAsset(asset, size: size, options: options, contentMode: .aspectFill, completeBlock: completeBlock)
 	}
 	
-	open func fetchImageForAsset(_ asset: DKAsset, size: CGSize, options: PHImageRequestOptions?, contentMode: PHImageContentMode,
+	public func fetchImageForAsset(_ asset: DKAsset, size: CGSize, options: PHImageRequestOptions?, contentMode: PHImageContentMode,
 	                               completeBlock: @escaping (_ image: UIImage?, _ info: [AnyHashable: Any]?) -> Void) {
 		let options = (options ?? self.defaultImageRequestOptions).copy() as! PHImageRequestOptions
 		self.manager.requestImage(for: asset.originalAsset!,
@@ -120,30 +120,32 @@ open class DKImageManager: DKBaseManager {
 		})
 	}
 	
-	open func fetchImageDataForAsset(_ asset: DKAsset, options: PHImageRequestOptions?, completeBlock: @escaping (_ data: Data?, _ info: [AnyHashable: Any]?) -> Void) {
+	public func fetchImageDataForAsset(_ asset: DKAsset, options: PHImageRequestOptions?, completeBlock: @escaping (_ data: Data?, _ info: [AnyHashable: Any]?) -> Void) {
+
 
 		guard let phAsset = asset.originalAsset else {
 			completeBlock(nil, nil)
 			return
 		}
+
 		self.manager.requestImageData(for: phAsset,
-		                                      options: options ?? self.defaultImageRequestOptions) { (data, dataUTI, orientation, info) in
-												if let isInCloud = (info?[PHImageResultIsInCloudKey] as AnyObject).boolValue
-													, data == nil && isInCloud && self.autoDownloadWhenAssetIsInCloud {
-													let requestCloudOptions = (options ?? self.defaultImageRequestOptions).copy() as! PHImageRequestOptions
-													requestCloudOptions.isNetworkAccessAllowed = true
-													self.fetchImageDataForAsset(asset, options: requestCloudOptions, completeBlock: completeBlock)
-												} else {
-													completeBlock(data, info)
-												}
+		                              options: options ?? self.defaultImageRequestOptions) { (data, dataUTI, orientation, info) in
+										if let isInCloud = (info?[PHImageResultIsInCloudKey] as AnyObject).boolValue
+											, data == nil && isInCloud && self.autoDownloadWhenAssetIsInCloud {
+											let requestCloudOptions = (options ?? self.defaultImageRequestOptions).copy() as! PHImageRequestOptions
+											requestCloudOptions.isNetworkAccessAllowed = true
+											self.fetchImageDataForAsset(asset, options: requestCloudOptions, completeBlock: completeBlock)
+										} else {
+											completeBlock(data, info)
+										}
 		}
 	}
-	
-	open func fetchAVAsset(_ asset: DKAsset, completeBlock: @escaping (_ avAsset: AVAsset?, _ info: [AnyHashable: Any]?) -> Void) {
+
+	public func fetchAVAsset(_ asset: DKAsset, completeBlock: @escaping (_ avAsset: AVAsset?, _ info: [AnyHashable: Any]?) -> Void) {
 		self.fetchAVAsset(asset, options: nil, completeBlock: completeBlock)
 	}
 	
-	open func fetchAVAsset(_ asset: DKAsset, options: PHVideoRequestOptions?, completeBlock: @escaping (_ avAsset: AVAsset?, _ info: [AnyHashable: Any]?) -> Void) {
+	public func fetchAVAsset(_ asset: DKAsset, options: PHVideoRequestOptions?, completeBlock: @escaping (_ avAsset: AVAsset?, _ info: [AnyHashable: Any]?) -> Void) {
 		self.manager.requestAVAsset(forVideo: asset.originalAsset!,
 			options: options ?? self.defaultVideoRequestOptions) { avAsset, audioMix, info in
 				if let isInCloud = (info?[PHImageResultIsInCloudKey] as AnyObject).boolValue

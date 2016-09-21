@@ -185,7 +185,7 @@ open class DKCamera: UIViewController {
         let cameraSwitchButton: UIButton = {
             let cameraSwitchButton = UIButton()
             cameraSwitchButton.addTarget(self, action: #selector(DKCamera.switchCamera), for: .touchUpInside)
-            cameraSwitchButton.setImage(DKCameraResource.cameraSwitchImage(), for: UIControlState())
+            cameraSwitchButton.setImage(DKCameraResource.cameraSwitchImage(), for: .normal)
             cameraSwitchButton.sizeToFit()
             
             return cameraSwitchButton
@@ -239,8 +239,8 @@ open class DKCamera: UIViewController {
         // cancel button
         let cancelButton: UIButton = {
             let cancelButton = UIButton()
-            cancelButton.addTarget(self, action: #selector(DKCamera.dismiss), for: .touchUpInside)
-            cancelButton.setImage(DKCameraResource.cameraCancelImage(), for: UIControlState())
+            cancelButton.addTarget(self, action: #selector(dismiss as (Void) -> Void), for: .touchUpInside)
+            cancelButton.setImage(DKCameraResource.cameraCancelImage(), for: .normal)
             cancelButton.sizeToFit()
             
             return cancelButton
@@ -272,37 +272,33 @@ open class DKCamera: UIViewController {
         if let stillImageOutput = self.stillImageOutput {
             self.stillImageOutput = nil // Just taking only one image.
             
-            DispatchQueue.global(priority: 0).async(execute: {
-                let connection = stillImageOutput.connection(withMediaType: AVMediaTypeVideo)
-                if connection == nil {
-                    return
-                }
-                
-                connection.videoOrientation = self.currentOrientation.toAVCaptureVideoOrientation()
-                connection.videoScaleAndCropFactor = self.zoomScale
-                
-                stillImageOutput.captureStillImageAsynchronously(from: connection, completionHandler: { (imageDataSampleBuffer, error: NSError?) -> Void in
+            DispatchQueue.global().async(execute: {
+                if let connection = stillImageOutput.connection(withMediaType: AVMediaTypeVideo) {
+                    connection.videoOrientation = self.currentOrientation.toAVCaptureVideoOrientation()
+                    connection.videoScaleAndCropFactor = self.zoomScale
                     
-                    if error == nil {
-                        let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
-                        
-                        if let didFinishCapturingImage = self.didFinishCapturingImage, let takenImage = UIImage(data: imageData) {
-                            
-                            let outputRect = self.previewLayer.metadataOutputRectOfInterest(for: self.previewLayer.bounds)
-                            let takenCGImage = takenImage.cgImage
-                            let width = CGFloat(takenCGImage.width)
-                            let height = CGFloat(takenCGImage.height)
-                            let cropRect = CGRect(x: outputRect.origin.x * width, y: outputRect.origin.y * height, width: outputRect.size.width * width, height: outputRect.size.height * height)
-                            
-                            let cropCGImage = takenCGImage.cropping(to: cropRect)
-                            let cropTakenImage = UIImage(cgImage: cropCGImage!, scale: 1, orientation: takenImage.imageOrientation)
-                            
-                            didFinishCapturingImage(image: cropTakenImage)
+                    stillImageOutput.captureStillImageAsynchronously(from: connection, completionHandler: { (imageDataSampleBuffer, error) in
+                        if error == nil {
+                            let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
+
+                            if let didFinishCapturingImage = self.didFinishCapturingImage, let imageData = imageData, let takenImage = UIImage(data: imageData) {
+                                
+                                let outputRect = self.previewLayer.metadataOutputRectOfInterest(for: self.previewLayer.bounds)
+                                let takenCGImage = takenImage.cgImage!
+                                let width = CGFloat(takenCGImage.width)
+                                let height = CGFloat(takenCGImage.height)
+                                let cropRect = CGRect(x: outputRect.origin.x * width, y: outputRect.origin.y * height, width: outputRect.size.width * width, height: outputRect.size.height * height)
+                                
+                                let cropCGImage = takenCGImage.cropping(to: cropRect)
+                                let cropTakenImage = UIImage(cgImage: cropCGImage!, scale: 1, orientation: takenImage.imageOrientation)
+                                
+                                didFinishCapturingImage(cropTakenImage)
+                            }
+                        } else {
+                            print("error while capturing still image: \(error!.localizedDescription)", terminator: "")
                         }
-                    } else {
-                        print("error while capturing still image: \(error!.localizedDescription)", terminator: "")
-                    }
-                })
+                    })
+                }
             })
         }
         
@@ -374,7 +370,7 @@ open class DKCamera: UIViewController {
         }
         let flashImage: UIImage = FlashImage.images[self.flashMode]!
         
-        self.flashButton.setImage(flashImage, for: UIControlState())
+        self.flashButton.setImage(flashImage, for: .normal)
         self.flashButton.sizeToFit()
     }
     

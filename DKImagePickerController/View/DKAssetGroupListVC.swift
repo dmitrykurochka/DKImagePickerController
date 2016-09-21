@@ -209,7 +209,7 @@ class DKAssetGroupListVC: UITableViewController, DKGroupDataManagerObserver {
 				}
 			}
 		}
-        cell.totalCountLabel.text = "\(assetGroup.totalCount)"
+        cell.totalCountLabel.text = String(assetGroup.totalCount)
         
         return cell
     }
@@ -217,7 +217,7 @@ class DKAssetGroupListVC: UITableViewController, DKGroupDataManagerObserver {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DKPopoverViewController.dismissPopoverViewController()
 		
-		self.selectedGroup = self.groups![(indexPath as NSIndexPath).row]
+		self.selectedGroup = self.groups![indexPath.row]
 		selectedGroupDidChangeBlock?(self.selectedGroup)
     }
 	
@@ -230,7 +230,7 @@ class DKAssetGroupListVC: UITableViewController, DKGroupDataManagerObserver {
 	
 	func groupDidRemove(_ groupId: String) {
 		let indexPath = IndexPath(row: self.groups!.index(of: groupId)!, section: 0)
-		self.groups?.remove(at: (indexPath as NSIndexPath).row)
+		self.groups?.remove(at: indexPath.row)
 		self.tableView.deleteRows(at: [indexPath], with: .none)
 		
 		if self.selectedGroup == groupId {

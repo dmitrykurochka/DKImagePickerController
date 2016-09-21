@@ -60,7 +60,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 		}
 		
 		func setCameraImage(_ cameraImage: UIImage) {
-			self.cameraButton.setImage(cameraImage, for: UIControlState())
+			self.cameraButton.setImage(cameraImage, for: .normal)
 		}
 		
         func cameraButtonClicked() {
@@ -108,8 +108,8 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
             
         } /* DKImageCheckView */
 		
-		fileprivate var asset: DKAsset!
-		
+        var asset: DKAsset!
+
         fileprivate let thumbnailImageView: UIImageView = {
             let thumbnailImageView = UIImageView()
             thumbnailImageView.contentMode = .scaleAspectFill
@@ -149,7 +149,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
     
     class DKVideoAssetCell: DKAssetCell {
 		
-		override fileprivate var asset: DKAsset! {
+		override internal var asset: DKAsset! {
 			didSet {
 				let videoDurationLabel = self.videoInfoView.viewWithTag(-1) as! UILabel
 				let minutes: Int = Int(asset.duration!) / 60
@@ -187,7 +187,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
             
             return videoInfoView
         }()
-        
+
         override init(frame: CGRect) {
             super.init(frame: frame)
             
@@ -212,8 +212,8 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
         let button = UIButton()
 		
 		let globalTitleColor = UINavigationBar.appearance().titleTextAttributes?[NSForegroundColorAttributeName] as? UIColor
-		button.setTitleColor(globalTitleColor ?? UIColor.black, for: UIControlState())
-		
+		button.setTitleColor(globalTitleColor ?? UIColor.black, for: .normal)
+
 		let globalTitleFont = UINavigationBar.appearance().titleTextAttributes?[NSFontAttributeName] as? UIFont
 		button.titleLabel!.font = globalTitleFont ?? UIFont.boldSystemFont(ofSize: 18.0)
 		
@@ -237,7 +237,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
-		if let currentViewSize = self.currentViewSize , currentViewSize.equalTo(self.view.bounds.size) {
+		if let currentViewSize = self.currentViewSize, currentViewSize.equalTo(self.view.bounds.size) {
 			return
 		} else {
 			currentViewSize = self.view.bounds.size
@@ -324,7 +324,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 	func updateTitleView() {
 		let group = getImageManager().groupDataManager.fetchGroupWithGroupId(self.selectedGroupId!)
 		self.title = group.groupName
-		
+
 		let groupsCount = getImageManager().groupDataManager.groupIds?.count
 		if let attrTitle = self.imagePickerController.attributedTitleForGroup?(group.groupName) , groupsCount > 1 {
 
@@ -337,7 +337,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 		} else {
 			self.selectGroupButton.setTitle(group.groupName + (groupsCount > 1 ? " \u{25be}" : "" ), for: UIControlState())
 		}
-		
+
 		self.selectGroupButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping;
 		self.selectGroupButton.titleLabel?.textAlignment = NSTextAlignment.center;
 		self.selectGroupButton.sizeToFit()
@@ -370,7 +370,8 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 	}
 	
 	func assetCellForIndexPath(_ indexPath: IndexPath) -> UICollectionViewCell {
-		let assetIndex = ((indexPath as NSIndexPath).row - (self.hidesCamera ? 0 : 1))
+
+		let assetIndex = (indexPath.row - (self.hidesCamera ? 0 : 1))
 		let group = getImageManager().groupDataManager.fetchGroupWithGroupId(self.selectedGroupId!)
 		
 		let asset = getImageManager().groupDataManager.fetchAssetWithGroup(group, index: assetIndex)
@@ -393,6 +394,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 		cell.tag = tag
 		
 		let itemSize = self.collectionView!.collectionViewLayout.layoutAttributesForItem(at: indexPath)!.size
+
 		asset.fetchImageWithSize(itemSize.toPixel(), options: self.groupImageRequestOptions, contentMode: .aspectFill) { (image, info) in
 			if cell.tag == tag {
 				cell.thumbnailImageView.image = image
@@ -401,6 +403,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 		
 		if let index = self.imagePickerController.selectedAssets.index(of: asset) {
 			cell.isSelected = true
+
 			cell.checkView.checkLabel.text = "\(index + 1 + self.imagePickerController.displayedCellNumbersShouldStartFrom)"
 			self.collectionView!.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
 		} else {
@@ -421,7 +424,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if (indexPath as NSIndexPath).row == 0 && !self.hidesCamera {
+        if indexPath.row == 0 && !self.hidesCamera {
             return self.cameraCellForIndexPath(indexPath)
         } else {
             return self.assetCellForIndexPath(indexPath)
@@ -430,15 +433,16 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         if let firstSelectedAsset = self.imagePickerController.selectedAssets.first,
-            let selectedAsset = (collectionView.cellForItem(at: indexPath) as? DKAssetCell)?.asset
-            , self.imagePickerController.allowMultipleTypes == false && firstSelectedAsset.isVideo != selectedAsset.isVideo {
-                
-                UIAlertView(title: DKImageLocalizedStringWithKey("selectPhotosOrVideos"),
-                    message: DKImageLocalizedStringWithKey("selectPhotosOrVideosError"),
-                    delegate: nil,
-                    cancelButtonTitle: DKImageLocalizedStringWithKey("ok")).show()
-                
-                return false
+			let selectedAsset = (collectionView.cellForItem(at: indexPath) as? DKAssetCell)?.asset, self.imagePickerController.allowMultipleTypes == false && firstSelectedAsset.isVideo != selectedAsset.isVideo {
+
+            let alert = UIAlertController(
+                    title: DKImageLocalizedStringWithKey("selectPhotosOrVideos")
+                    , message: DKImageLocalizedStringWithKey("selectPhotosOrVideosError")
+                    , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: DKImageLocalizedStringWithKey("ok"), style: .cancel) { _ in })
+            self.imagePickerController.present(alert, animated: true){}
+
+            return false
         }
 		
 		let shouldSelect = self.imagePickerController.selectedAssets.count < self.imagePickerController.maxSelectableCount
@@ -463,7 +467,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 			let removedIndex = self.imagePickerController.selectedAssets.index(of: removedAsset)!
 			
 			/// Minimize the number of cycles.
-			let indexPathsForSelectedItems = collectionView.indexPathsForSelectedItems as [IndexPath]!
+			let indexPathsForSelectedItems = collectionView.indexPathsForSelectedItems!
 			let indexPathsForVisibleItems = collectionView.indexPathsForVisibleItems
 			
 			let intersect = Set(indexPathsForVisibleItems).intersection(Set(indexPathsForSelectedItems))

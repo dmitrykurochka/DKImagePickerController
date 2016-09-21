@@ -80,10 +80,11 @@ open class DKPopoverViewController: UIViewController {
             
             let arrowPath = CGMutablePath()
             
-            CGPathMoveToPoint(arrowPath, nil,  arrowWidth / 2, 0)
-            CGPathAddLineToPoint(arrowPath, nil, arrowWidth, arrowHeight)
-            CGPathAddLineToPoint(arrowPath, nil, 0, arrowHeight)
-            arrowPath.closeSubpath()
+            arrowPath.move(to: CGPoint(x: arrowWidth / 2, y: 0))
+            arrowPath.move(to: CGPoint(x: arrowWidth, y: arrowHeight))
+            arrowPath.addLine(to: CGPoint(x: 0, y: arrowHeight))
+
+			arrowPath.closeSubpath()
 
             context?.addPath(arrowPath)
             
@@ -106,7 +107,7 @@ open class DKPopoverViewController: UIViewController {
         
         let backgroundView = UIControl(frame: self.view.frame)
         backgroundView.backgroundColor = UIColor.clear
-        backgroundView.addTarget(self, action: #selector(DKPopoverViewController.dismiss), for: .touchUpInside)
+        backgroundView.addTarget(self, action: #selector(dismiss as (Void) -> Void), for: .touchUpInside)
         backgroundView.autoresizingMask = self.view.autoresizingMask
         self.view = backgroundView
     }
