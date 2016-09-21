@@ -239,7 +239,7 @@ open class DKCamera: UIViewController {
         // cancel button
         let cancelButton: UIButton = {
             let cancelButton = UIButton()
-            cancelButton.addTarget(self, action: #selector(dismiss as (Void) -> Void), for: .touchUpInside)
+            cancelButton.addTarget(self, action: #selector(DKCamera.dismissController), for: .touchUpInside)
             cancelButton.setImage(DKCameraResource.cameraCancelImage(), for: .normal)
             cancelButton.sizeToFit()
             
@@ -259,7 +259,7 @@ open class DKCamera: UIViewController {
     
     // MARK: - Callbacks
     
-    internal func dismiss() {
+    internal func dismissController() {
         self.didCancel?()
     }
     
