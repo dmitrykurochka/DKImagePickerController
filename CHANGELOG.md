@@ -1,6 +1,17 @@
 
 # Change Log
-## [3.3.7](https://github.com/zhangao0086/DKImagePickerController/tree/3.3.7) (2016-08-30)
+
+## [3.4.1](https://github.com/practo/DKImagePickerController/tree/3.4.1) (2016-09-23)
+
+- Migrating to swift3
+
+## [3.4.0](https://github.com/zhangao0086/DKImagePickerController/tree/3.4.0) (2016-09-18)
+
+[Full Changelog](https://github.com/zhangao0086/DKImagePickerController/compare/3.3.4...3.4.0)
+
+- Migrating to swift3
+
+## [3.3.7](https://github.com/practo/DKImagePickerController/tree/3.3.7) (2016-08-30)
 
 - Fixed Lots of weird stuff
 
