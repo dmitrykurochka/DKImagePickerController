@@ -1,0 +1,20 @@
+PODS:
+  - DKImagePickerController@Practo (3.4.1):
+    - DKImagePickerController@Practo/Camera (= 3.4.1)
+    - DKImagePickerController@Practo/ImageManager (= 3.4.1)
+  - DKImagePickerController@Practo/Camera (3.4.1)
+  - DKImagePickerController@Practo/ImageManager (3.4.1)
+
+DEPENDENCIES:
+  - DKImagePickerController@Practo (from `../DKImagePickerController`)
+
+EXTERNAL SOURCES:
+  DKImagePickerController@Practo:
+    :path: ../DKImagePickerController
+
+SPEC CHECKSUMS:
+  DKImagePickerController@Practo: 48cbba07c73e73dd20df1f10b9c63c2788de5f15
+
+PODFILE CHECKSUM: 2cfd19e68beccb312263e1cbfc0a423e5bcc2917
+
+COCOAPODS: 1.0.1

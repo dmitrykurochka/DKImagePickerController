@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import DKImagePickerController_Practo
 
 open class CustomUIDelegate: DKImagePickerControllerDefaultUIDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	

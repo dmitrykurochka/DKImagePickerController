@@ -1,0 +1,6 @@
+framework module DKImagePickerController_Practo {
+  umbrella header "DKImagePickerController@Practo-umbrella.h"
+
+  export *
+  module * { export * }
+}

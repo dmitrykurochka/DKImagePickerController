@@ -1,0 +1,43 @@
+{
+  "name": "DKImagePickerController@Practo",
+  "version": "3.4.1",
+  "summary": "It's a Facebook style Image Picker Controller by Swift3.",
+  "homepage": "https://github.com/practo/DKImagePickerController",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Sambhav Shah": "sambhav.shah@practo.com"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "git": "https://github.com/practo/DKImagePickerController.git",
+    "tag": "3.4.1"
+  },
+  "source_files": "DKImagePickerController/**/*.{h,swift}",
+  "resources": "DKImagePickerController/DKImagePickerController.bundle",
+  "frameworks": [
+    "Foundation",
+    "UIKit",
+    "Photos"
+  ],
+  "requires_arc": true,
+  "subspecs": [
+    {
+      "name": "Camera",
+      "ios": {
+        "source_files": "DKCamera/DKCamera.swift"
+      },
+      "resources": "DKCamera/DKCameraResource.bundle"
+    },
+    {
+      "name": "ImageManager",
+      "ios": {
+        "source_files": "DKImageManager/**/*.swift"
+      }
+    }
+  ]
+}
