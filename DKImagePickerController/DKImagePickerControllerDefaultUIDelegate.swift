@@ -10,12 +10,12 @@ import UIKit
 
 @objc
 open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerControllerUIDelegate {
-	
+
 	open weak var imagePickerController: DKImagePickerController!
 	open weak var parentNavItem: UINavigationItem!
 
 
-	open lazy var doneButton: UIButton = {
+	open lazy var doneButton: UIBarButtonItem = {
 		return self.createDoneButton()
 	}()
 
@@ -23,26 +23,24 @@ open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCont
 		return UIBarButtonItem(barButtonSystemItem: .cancel, target: self.imagePickerController, action: #selector(DKImagePickerController.dismissController))
 	}
 
-	open func createDoneButton() -> UIButton {
-		let button = UIButton(type: UIButtonType.custom)
-		button.setTitleColor(UINavigationBar.appearance().tintColor ?? self.imagePickerController.navigationBar.tintColor, for: .normal)
-		button.addTarget(self.imagePickerController, action: #selector(DKImagePickerController.done), for: UIControlEvents.touchUpInside)
+	open func createDoneButton() -> UIBarButtonItem {
+		let button = UIBarButtonItem(title: nil, style: UIBarButtonItemStyle.done, target: self.imagePickerController, action: #selector(DKImagePickerController.done))
 		self.updateDoneButtonTitle(button)
 		return button
 	}
-    
-    open func updateDoneButtonTitle(_ button: UIButton) {
-        if self.imagePickerController.selectedAssets.count > 0 {
-            button.setTitle(String(format: DKImageLocalizedStringWithKey("select"), self.imagePickerController.selectedAssets.count), for: .normal)
-        } else {
-            button.setTitle(DKImageLocalizedStringWithKey("done"), for: .normal)
-        }
-        
-        button.sizeToFit()
-    }
-	
+
+	open func updateDoneButtonTitle(_ button: UIBarButtonItem) {
+		if self.imagePickerController.selectedAssets.count > 0 {
+			button.title = String(format: DKImageLocalizedStringWithKey("select"), self.imagePickerController.selectedAssets.count)
+		} else {
+			button.title = DKImageLocalizedStringWithKey("done")
+		}
+
+		self.parentNavItem.setRightBarButton(button, animated: false)
+	}
+
 	// Delegate methods...
-	
+
 	open func prepareLayout(_ imagePickerController: DKImagePickerController, vc: UIViewController) {
 		self.imagePickerController = imagePickerController
 		self.parentNavItem = vc.navigationItem
@@ -51,92 +49,92 @@ open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCont
 
 
 	open func imagePickerControllerCreateCamera(_ imagePickerController: DKImagePickerController,
-	                                              didCancel: @escaping (() -> Void),
-	                                              didFinishCapturingImage: @escaping ((_ image: UIImage) -> Void),
-	                                              didFinishCapturingVideo: @escaping ((_ videoURL: URL) -> Void)) -> UIViewController {
+	                                            didCancel: @escaping (() -> Void),
+	                                            didFinishCapturingImage: @escaping ((_ image: UIImage) -> Void),
+	                                            didFinishCapturingVideo: @escaping ((_ videoURL: URL) -> Void)) -> UIViewController {
 
 		let camera = DKCamera()
-		
+
 		camera.didCancel = { () -> Void in
 			didCancel()
 		}
-		
+
 		camera.didFinishCapturingImage = { (image) in
 			didFinishCapturingImage(image)
 		}
-		
+
 		self.checkCameraPermission(camera)
-	
+
 		return camera
 	}
-	
+
 	open func layoutForImagePickerController(_ imagePickerController: DKImagePickerController) -> UICollectionViewLayout.Type {
 		return DKAssetGroupGridLayout.self
 	}
-	
+
 	open func imagePickerController(_ imagePickerController: DKImagePickerController,
-	                                  showsCancelButtonForVC vc: UIViewController) {
+	                                showsCancelButtonForVC vc: UIViewController) {
 		vc.navigationItem.leftBarButtonItem = createCancelButton()
 	}
-	
+
 	open func imagePickerController(_ imagePickerController: DKImagePickerController,
-	                                  hidesCancelButtonForVC vc: UIViewController) {
+	                                hidesCancelButtonForVC vc: UIViewController) {
 		vc.navigationItem.leftBarButtonItem = nil
 	}
-	
+
 	open func imagePickerController(_ imagePickerController: DKImagePickerController, didSelectAsset: DKAsset) {
 		self.updateDoneButtonTitle(self.doneButton)
 	}
-    
-    open func imagePickerController(_ imagePickerController: DKImagePickerController, didSelectAssets: [DKAsset]) {
-        self.updateDoneButtonTitle(self.doneButton)
-    }
-	
+
+	open func imagePickerController(_ imagePickerController: DKImagePickerController, didSelectAssets: [DKAsset]) {
+		self.updateDoneButtonTitle(self.doneButton)
+	}
+
 	open func imagePickerController(_ imagePickerController: DKImagePickerController, didDeselectAsset: DKAsset) {
 		self.updateDoneButtonTitle(self.doneButton)
 	}
-    
-    open func imagePickerController(_ imagePickerController: DKImagePickerController, didDeselectAssets: [DKAsset]) {
-        self.updateDoneButtonTitle(self.doneButton)
-    }
-	
+
+	open func imagePickerController(_ imagePickerController: DKImagePickerController, didDeselectAssets: [DKAsset]) {
+		self.updateDoneButtonTitle(self.doneButton)
+	}
+
 	open func imagePickerControllerDidReachMaxLimit(_ imagePickerController: DKImagePickerController) {
 
 		let messageString = imagePickerController.maxSelectedLocalizedMessage ?? String(format: DKImageLocalizedStringWithKey("maxLimitReachedMessage"), imagePickerController.maxSelectableCount)
 
-        let alert = UIAlertController(title: DKImageLocalizedStringWithKey("maxLimitReached")
-            , message:messageString
-            , preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: DKImageLocalizedStringWithKey("ok"), style: .cancel) { _ in })
-        imagePickerController.present(alert, animated: true){}
+		let alert = UIAlertController(title: DKImageLocalizedStringWithKey("maxLimitReached")
+			, message:messageString
+			, preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: DKImageLocalizedStringWithKey("ok"), style: .cancel) { _ in })
+		imagePickerController.present(alert, animated: true){}
 	}
-	
+
 	open func imagePickerControllerFooterView(_ imagePickerController: DKImagePickerController) -> UIView? {
 		return nil
 	}
-    
-    open func imagePickerControllerCameraImage() -> UIImage {
-        return DKImageResource.cameraImage()
-    }
-    
-    open func imagePickerControllerCheckedNumberColor() -> UIColor {
-        return UIColor.white
-    }
-    
-    open func imagePickerControllerCheckedNumberFont() -> UIFont {
-        return UIFont.boldSystemFont(ofSize: 14)
-    }
-    
-    open func imagePickerControllerCheckedImageTintColor() -> UIColor? {
-        return nil
-    }
-    
-    open func imagePickerControllerCollectionViewBackgroundColor() -> UIColor {
-        return UIColor.white
-    }
-	
+
+	open func imagePickerControllerCameraImage() -> UIImage {
+		return DKImageResource.cameraImage()
+	}
+
+	open func imagePickerControllerCheckedNumberColor() -> UIColor {
+		return UIColor.white
+	}
+
+	open func imagePickerControllerCheckedNumberFont() -> UIFont {
+		return UIFont.boldSystemFont(ofSize: 14)
+	}
+
+	open func imagePickerControllerCheckedImageTintColor() -> UIColor? {
+		return nil
+	}
+
+	open func imagePickerControllerCollectionViewBackgroundColor() -> UIColor {
+		return UIColor.white
+	}
+
 	// Internal
-	
+
 	public func checkCameraPermission(_ camera: DKCamera) {
 		func cameraDenied() {
 			DispatchQueue.main.async {
@@ -144,11 +142,11 @@ open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCont
 				camera.cameraOverlayView = permissionView
 			}
 		}
-		
+
 		func setup() {
 			camera.cameraOverlayView = nil
 		}
-		
+
 		DKCamera.checkCameraPermission { granted in
 			granted ? setup() : cameraDenied()
 		}
