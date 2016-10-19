@@ -1,0 +1,33 @@
+//
+//  GitHub
+//  https://github.com/zhangao0086/DKImagePickerController
+//
+//
+//  License
+//  Copyright (c) 2014 ZhangAo
+//  Released under an MIT license: http://opensource.org/licenses/MIT
+//
+
+"select" = "Pilih(%ld)";
+
+"permissionCamera" = "Silakan Izinkan Kamera Access";
+
+"permissionPhoto" = "Silakan Izinkan Foto Access";
+
+"permit" = "Izinkan Akses";
+
+"gotoSettings" = "Pergi Untuk 「Pengaturan」 Untuk Berikan Akses";
+
+"ok" = "Baik";
+
+"selectPhotosOrVideos" = "Pilih Foto atau Video";
+
+"selectPhotosOrVideosError" = "Hal ini tidak mungkin untuk memilih foto dan video pada waktu yang sama.";
+
+"done" = "Selesai";
+
+"cancel" = "Batal";
+
+"maxLimitReached" = "Foto Max batas yang mencapai";
+
+"maxLimitReachedMessage" = "Anda dapat memilih %ld item";
