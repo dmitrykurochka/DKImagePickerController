@@ -9,26 +9,6 @@
 import UIKit
 import AVFoundation
 import Photos
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 private let DKImageCameraIdentifier = "DKImageCameraIdentifier"
 private let DKImageAssetIdentifier = "DKImageAssetIdentifier"
@@ -325,7 +305,8 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 		let group = getImageManager().groupDataManager.fetchGroupWithGroupId(self.selectedGroupId!)
 		self.title = group.groupName
 
-		let groupsCount = getImageManager().groupDataManager.groupIds?.count
+		let groupsCount = getImageManager().groupDataManager.groupIds?.count ?? 0
+
 		if let attrTitle = self.imagePickerController.attributedTitleForGroup?(group.groupName) , groupsCount > 1 {
 
 			let attributedTitle = NSMutableAttributedString(attributedString: attrTitle)
