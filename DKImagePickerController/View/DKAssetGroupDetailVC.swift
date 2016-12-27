@@ -421,7 +421,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
                     , message: DKImageLocalizedStringWithKey("selectPhotosOrVideosError")
                     , preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: DKImageLocalizedStringWithKey("ok"), style: .cancel) { _ in })
-            self.imagePickerController.present(alert, animated: true){}
+            self.imagePickerController.present(alert, animated: true) {}
 
             return false
         }

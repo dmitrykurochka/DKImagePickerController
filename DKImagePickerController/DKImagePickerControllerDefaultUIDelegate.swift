@@ -106,7 +106,7 @@ open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCont
 			, message:messageString
 			, preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: DKImageLocalizedStringWithKey("ok"), style: .cancel) { _ in })
-		imagePickerController.present(alert, animated: true){}
+		imagePickerController.present(alert, animated: true) {}
 	}
 
 	open func imagePickerControllerFooterView(_ imagePickerController: DKImagePickerController) -> UIView? {
