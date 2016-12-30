@@ -116,6 +116,10 @@ public protocol DKImagePickerControllerUIDelegate {
      */
     func imagePickerControllerCollectionViewBackgroundColor() -> UIColor
 
+	/**
+	 Set the statusbar style of the collection
+	*/
+	func preferredStatusBarStyle() -> UIStatusBarStyle
 }
 
 /**

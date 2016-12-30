@@ -214,6 +214,12 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 	fileprivate var footerView: UIView?
 	
 	fileprivate var currentViewSize: CGSize!
+
+
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		return self.imagePickerController.UIDelegate.preferredStatusBarStyle()
+	}
+
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		

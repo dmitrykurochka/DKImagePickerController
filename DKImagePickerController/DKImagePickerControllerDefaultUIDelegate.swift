@@ -19,6 +19,10 @@ open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCont
 		return self.createDoneButton()
 	}()
 
+	open func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return .default
+	}
+
 	open func createCancelButton() -> UIBarButtonItem {
 		return UIBarButtonItem(barButtonSystemItem: .cancel, target: self.imagePickerController, action: #selector(DKImagePickerController.dismissController))
 	}
