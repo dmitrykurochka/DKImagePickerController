@@ -32,7 +32,7 @@ open class DKPopoverViewController: UIViewController {
         }
     }
     
-    fileprivate class DKPopoverView: UIView {
+    private class DKPopoverView: UIView {
         
         var contentView: UIView! {
             didSet {
@@ -81,10 +81,9 @@ open class DKPopoverViewController: UIViewController {
             let arrowPath = CGMutablePath()
             
             arrowPath.move(to: CGPoint(x: arrowWidth / 2, y: 0))
-            arrowPath.move(to: CGPoint(x: arrowWidth, y: arrowHeight))
+            arrowPath.addLine(to: CGPoint(x: arrowWidth, y: arrowHeight))
             arrowPath.addLine(to: CGPoint(x: 0, y: arrowHeight))
-
-			arrowPath.closeSubpath()
+            arrowPath.closeSubpath()
 
             context?.addPath(arrowPath)
             
@@ -100,7 +99,7 @@ open class DKPopoverViewController: UIViewController {
     
     var contentViewController: UIViewController!
     var fromView: UIView!
-    fileprivate let popoverView = DKPopoverView()
+    private let popoverView = DKPopoverView()
     
     override open func loadView() {
         super.loadView()

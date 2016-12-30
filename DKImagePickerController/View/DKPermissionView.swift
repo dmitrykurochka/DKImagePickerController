@@ -10,8 +10,8 @@ import UIKit
 
 internal class DKPermissionView: UIView {
 	
-	fileprivate let titleLabel = UILabel()
-	fileprivate let permitButton = UIButton()
+	private let titleLabel = UILabel()
+	private let permitButton = UIButton()
 	
 	internal class func permissionView(_ style: DKImagePickerControllerSourceType) -> DKPermissionView {
 		

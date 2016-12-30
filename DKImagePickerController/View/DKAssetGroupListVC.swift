@@ -192,10 +192,10 @@ class DKAssetGroupListVC: UITableViewController, DKGroupDataManagerObserver {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DKImageGroupCellIdentifier, for: indexPath) as! DKAssetGroupCell
 		
-        let assetGroup = getImageManager().groupDataManager.fetchGroupWithGroupId(groups![(indexPath as NSIndexPath).row])
+        let assetGroup = getImageManager().groupDataManager.fetchGroupWithGroupId(groups![indexPath.row])
         cell.groupNameLabel.text = assetGroup.groupName
 		
-		let tag = (indexPath as NSIndexPath).row + 1
+		let tag = indexPath.row + 1
 		cell.tag = tag
 		
 		if assetGroup.totalCount == 0 {

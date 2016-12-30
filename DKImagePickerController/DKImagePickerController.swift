@@ -145,15 +145,13 @@ public enum DKImagePickerControllerSourceType : Int {
  */
 open class DKImagePickerController : UINavigationController {
 
-	open var UIDelegate: DKImagePickerControllerUIDelegate = {
+	lazy public var UIDelegate: DKImagePickerControllerUIDelegate = {
 		return DKImagePickerControllerDefaultUIDelegate()
 	}()
 
 	open var attributedTitleForGroup: ((String)->(NSAttributedString?))? = nil
 
     /// Forces selection of tapped image immediatly.
-	open var singleSelect = false
-
 	/// Selection for display and dismiss animation
 	open var shouldDisplayDismissAnimatedly = true
 
@@ -163,25 +161,27 @@ open class DKImagePickerController : UINavigationController {
 	/// Optional Alert message string when max limit reached
 	open var maxSelectedLocalizedMessage: String? = nil
 
+	public var singleSelect = false
+		
     /// The maximum count of assets which the user will be able to select.
-    open var maxSelectableCount = 999
+    public var maxSelectableCount = 999
 	
 	/// Set the defaultAssetGroup to specify which album is the default asset group.
-	open var defaultAssetGroup: PHAssetCollectionSubtype?
+	public var defaultAssetGroup: PHAssetCollectionSubtype?
 	
 	/// The types of PHAssetCollection to display in the picker.
-	public var assetGroupTypes: [PHAssetCollectionSubtype] = [
-		.smartAlbumUserLibrary,
-		.smartAlbumFavorites,
-		.albumRegular
-		] {
-		didSet {
-			getImageManager().groupDataManager.assetGroupTypes = self.assetGroupTypes
-		}
-	}
+    public var assetGroupTypes: [PHAssetCollectionSubtype] = [
+        .smartAlbumUserLibrary,
+        .smartAlbumFavorites,
+        .albumRegular
+        ] {
+        willSet(newTypes) {
+            getImageManager().groupDataManager.assetGroupTypes = newTypes
+        }
+    }
 	
 	/// Set the showsEmptyAlbums to specify whether or not the empty albums is shown in the picker.
-	open var showsEmptyAlbums = true {
+	public var showsEmptyAlbums = true {
 		didSet {
 			getImageManager().groupDataManager.showsEmptyAlbums = self.showsEmptyAlbums
 		}
@@ -196,14 +196,14 @@ open class DKImagePickerController : UINavigationController {
 	}
 	
 	/// The predicate applies to images only.
-	open var imageFetchPredicate: NSPredicate? {
+	public var imageFetchPredicate: NSPredicate? {
 		didSet {
 			getImageManager().groupDataManager.assetFetchOptions = self.createAssetFetchOptions()
 		}
 	}
 	
 	/// The predicate applies to videos only.
-	open var videoFetchPredicate: NSPredicate? {
+	public var videoFetchPredicate: NSPredicate? {
 		didSet {
 			getImageManager().groupDataManager.assetFetchOptions = self.createAssetFetchOptions()
 		}
@@ -219,21 +219,21 @@ open class DKImagePickerController : UINavigationController {
     }
     
     /// Whether allows to select photos and videos at the same time.
-    open var allowMultipleTypes = true
+    public var allowMultipleTypes = true
 	
 	/// If YES, and the requested image is not stored on the local device, the Picker downloads the image from iCloud.
-	open var autoDownloadWhenAssetIsInCloud = true {
+	public var autoDownloadWhenAssetIsInCloud = true {
 		didSet {
 			getImageManager().autoDownloadWhenAssetIsInCloud = self.autoDownloadWhenAssetIsInCloud
 		}
 	}
 	
 	/// Determines whether or not the rotation is enabled.
-	open var allowsLandscape = false
+	public var allowsLandscape = false
 	
 	/// The callback block is executed when user pressed the cancel button.
-	open var didCancel: (() -> Void)?
-	open var showsCancelButton = false {
+	public var didCancel: (() -> Void)?
+	public var showsCancelButton = false {
 		didSet {
 			if let rootVC =  self.viewControllers.first {
 				self.updateCancelButtonForVC(rootVC)
@@ -243,9 +243,9 @@ open class DKImagePickerController : UINavigationController {
 	
     /// The callback block is executed when user pressed the select button.
     public var didSelectAssets: ((_ assets: [DKAsset]) -> Void)?
-
+	
     /// It will have selected the specific assets.
-    open var defaultSelectedAssets: [DKAsset]? {
+    public var defaultSelectedAssets: [DKAsset]? {
         didSet {
 			if let count = self.defaultSelectedAssets?.count, count > 0 {
 				self.selectedAssets = self.defaultSelectedAssets ?? []
@@ -257,7 +257,7 @@ open class DKImagePickerController : UINavigationController {
         }
     }
         
-    open var selectedAssets = [DKAsset]()
+    public var selectedAssets = [DKAsset]()
 	
     public convenience init() {
 		let rootVC = UIViewController()
@@ -322,7 +322,7 @@ open class DKImagePickerController : UINavigationController {
 		}
 	}
 	
-	fileprivate lazy var assetFetchOptions: PHFetchOptions = {
+	private lazy var assetFetchOptions: PHFetchOptions = {
 		let assetFetchOptions = PHFetchOptions()
 		assetFetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
 		return assetFetchOptions
@@ -462,7 +462,7 @@ open class DKImagePickerController : UINavigationController {
         }
     }
     
-    open func deselectAllAssets() {
+    public func deselectAllAssets() {
         if self.selectedAssets.count > 0 {
             let assets = self.selectedAssets
             self.selectedAssets.removeAll()
