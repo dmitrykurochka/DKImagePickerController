@@ -129,8 +129,8 @@ open class DKImagePickerController : UINavigationController {
 		return DKImagePickerControllerDefaultUIDelegate()
 	}()
 
-	static var configureGroupNameSelectorTitleLabel: ((UILabel)->(Void))? = nil
-	static var configureGroupNameSelectorCountLabel: ((UILabel)->(Void))? = nil
+	public static var configureGroupNameSelectorTitleLabel: ((UILabel)->(Void))? = nil
+	public static var configureGroupNameSelectorCountLabel: ((UILabel)->(Void))? = nil
 
 	open var attributedTitleForGroup: ((String)->(NSAttributedString?))? = nil
 	open var fontForGroup: UIFont? = nil
