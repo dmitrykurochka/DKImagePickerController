@@ -50,6 +50,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 		
 		// Clear all the selected assets if you used the picker controller as a single instance.
 //		pickerController.defaultSelectedAssets = nil
+
+		pickerController.fontForGroup = UIFont.systemFont(ofSize: 16.0)
 		
 		pickerController.defaultSelectedAssets = self.assets
 		
