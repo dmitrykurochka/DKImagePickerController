@@ -333,6 +333,9 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 			self.selectGroupButton.setAttributedTitle(attributedTitle, for: UIControlState())
 		} else {
 			self.selectGroupButton.setTitle(group.groupName + (groupsCount > 1 ? " \u{25be}" : "" ), for: UIControlState())
+			if let font = self.imagePickerController.fontForGroup {
+				self.selectGroupButton.titleLabel?.font = font
+			}
 		}
 
 		self.selectGroupButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping;

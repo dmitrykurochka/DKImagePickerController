@@ -8,26 +8,6 @@
 
 import UIKit
 import Photos
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 @objc
 public protocol DKImagePickerControllerUIDelegate {
@@ -149,9 +129,13 @@ open class DKImagePickerController : UINavigationController {
 		return DKImagePickerControllerDefaultUIDelegate()
 	}()
 
-	open var attributedTitleForGroup: ((String)->(NSAttributedString?))? = nil
+	static var configureGroupNameSelectorTitleLabel: ((UILabel)->(Void))? = nil
+	static var configureGroupNameSelectorCountLabel: ((UILabel)->(Void))? = nil
 
-    /// Forces selection of tapped image immediatly.
+	open var attributedTitleForGroup: ((String)->(NSAttributedString?))? = nil
+	open var fontForGroup: UIFont? = nil
+
+	/// Forces selection of tapped image immediatly.
 	/// Selection for display and dismiss animation
 	open var shouldDisplayDismissAnimatedly = true
 

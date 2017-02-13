@@ -37,13 +37,19 @@ class DKAssetGroupCell: UITableViewCell {
     var groupNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 13)
+		if let configurator = DKImagePickerController.configureGroupNameSelectorTitleLabel {
+			configurator(label)
+		}
         return label
     }()
 	
     var totalCountLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 10)
-        label.textColor = UIColor.gray
+		label.textColor = UIColor.gray
+		if let configurator = DKImagePickerController.configureGroupNameSelectorCountLabel {
+			configurator(label)
+		}
         return label
     }()
     
