@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   
   s.name          = "DKImagePickerController@Practo"
-  s.version       = "3.5.0"
+  s.version       = "3.5.1"
   s.summary       = "It's a Facebook style Image Picker Controller in Swift3."
   s.homepage      = "https://github.com/practo/DKImagePickerController"
 
