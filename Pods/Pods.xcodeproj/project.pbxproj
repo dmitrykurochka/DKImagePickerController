@@ -65,11 +65,11 @@
 		73FDDF46F0C3FB9A80D680B6B59F15A7 /* Pods-DKImagePickerControllerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DKImagePickerControllerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		76E2DD1F6DA758BE81A1D431F7AF4E0C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7837850FD1C6823AD8E3CC27B2A04CE6 /* DKCameraResource.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; path = DKCameraResource.bundle; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9800C261B0B17E3C1CA64C869862E3FF /* DKImagePickerController_Practo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DKImagePickerController_Practo.framework; path = "DKImagePickerController@Practo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9800C261B0B17E3C1CA64C869862E3FF /* DKImagePickerController_Practo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DKImagePickerController_Practo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A314C8C8E56E490E4C7BC249858228E0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A4270C238331061F08C237A5B6AA502A /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Photos.framework; sourceTree = DEVELOPER_DIR; };
-		A6D109E2740DE3B3E8EEA2EE14422B5D /* Pods-DKImagePickerControllerDemo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-DKImagePickerControllerDemo.modulemap"; sourceTree = "<group>"; };
+		A6D109E2740DE3B3E8EEA2EE14422B5D /* Pods-DKImagePickerControllerDemo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-DKImagePickerControllerDemo.modulemap"; sourceTree = "<group>"; };
 		A6E9E9CB58CBD608A55086E4407D3BFF /* DKImagePickerController@Practo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DKImagePickerController@Practo-umbrella.h"; sourceTree = "<group>"; };
 		B1B7B4A86246FDB7DBEB4AFDCE8C1DC1 /* DKCamera.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DKCamera.swift; sourceTree = "<group>"; };
 		B40FC9415DF55A9DFCAE4843BC861BB0 /* Pods-DKImagePickerControllerDemo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DKImagePickerControllerDemo-frameworks.sh"; sourceTree = "<group>"; };
@@ -77,10 +77,10 @@
 		CCDDB301A6FB9507111E7507D56D7ABF /* DKImageManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DKImageManager.swift; sourceTree = "<group>"; };
 		D721E87C212FBE098425943B32BD9CB0 /* DKAssetGroupListVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DKAssetGroupListVC.swift; sourceTree = "<group>"; };
 		D78A3F4E667C6A56D9E34E4BF70F180A /* DKAsset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DKAsset.swift; sourceTree = "<group>"; };
-		DBD7C974A564B55A7A2C80644BC7CAC4 /* Pods_DKImagePickerControllerDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_DKImagePickerControllerDemo.framework; path = "Pods-DKImagePickerControllerDemo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBD7C974A564B55A7A2C80644BC7CAC4 /* Pods_DKImagePickerControllerDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DKImagePickerControllerDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC2DFD7A1164455E261A66F0366EE220 /* DKGroupDataManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DKGroupDataManager.swift; sourceTree = "<group>"; };
 		DEEBF2189CB19D777DB37D60339D5247 /* DKImagePickerController@Practo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "DKImagePickerController@Practo.xcconfig"; sourceTree = "<group>"; };
-		EE89C5ACB473904992AFA748FF93793F /* DKImagePickerController@Practo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "DKImagePickerController@Practo.modulemap"; sourceTree = "<group>"; };
+		EE89C5ACB473904992AFA748FF93793F /* DKImagePickerController@Practo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "DKImagePickerController@Practo.modulemap"; sourceTree = "<group>"; };
 		F71E44C35CBF1BD4476FC45C5C4F716E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,7 +148,6 @@
 			children = (
 				B1B7B4A86246FDB7DBEB4AFDCE8C1DC1 /* DKCamera.swift */,
 			);
-			name = DKCamera;
 			path = DKCamera;
 			sourceTree = "<group>";
 		};
@@ -158,7 +157,6 @@
 				D78A3F4E667C6A56D9E34E4BF70F180A /* DKAsset.swift */,
 				659176556C29BB8E33E23DC915E696A2 /* DKAssetGroup.swift */,
 			);
-			name = Model;
 			path = Model;
 			sourceTree = "<group>";
 		};
@@ -170,7 +168,6 @@
 				D721E87C212FBE098425943B32BD9CB0 /* DKAssetGroupListVC.swift */,
 				4B251B1D8BB22F24D0218EEB965A8D00 /* DKPermissionView.swift */,
 			);
-			name = View;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -184,7 +181,6 @@
 				5E2DDC826C215BDF47B2A66150CBA78D /* DKPopoverViewController.swift */,
 				2A49EFA1FE2EEC326331BFF27C29921E /* View */,
 			);
-			name = DKImagePickerController;
 			path = DKImagePickerController;
 			sourceTree = "<group>";
 		};
@@ -223,7 +219,6 @@
 				CCDDB301A6FB9507111E7507D56D7ABF /* DKImageManager.swift */,
 				C5FE2A3E28690EEB50E34DB987D3C660 /* Data */,
 			);
-			name = DKImageManager;
 			path = DKImageManager;
 			sourceTree = "<group>";
 		};
@@ -264,7 +259,6 @@
 				DC2DFD7A1164455E261A66F0366EE220 /* DKGroupDataManager.swift */,
 				1C1545C10961F1764450D91AC430EFB1 /* Model */,
 			);
-			name = Data;
 			path = Data;
 			sourceTree = "<group>";
 		};
@@ -273,7 +267,6 @@
 			children = (
 				2D51424F516B9B1D5762255F1A0840D0 /* DKImagePickerController.bundle */,
 			);
-			name = DKImagePickerController;
 			path = DKImagePickerController;
 			sourceTree = "<group>";
 		};
@@ -282,7 +275,6 @@
 			children = (
 				7837850FD1C6823AD8E3CC27B2A04CE6 /* DKCameraResource.bundle */,
 			);
-			name = DKCamera;
 			path = DKCamera;
 			sourceTree = "<group>";
 		};
@@ -387,7 +379,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0900;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -470,20 +462,30 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
@@ -514,19 +516,29 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
@@ -540,6 +552,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
 			};
