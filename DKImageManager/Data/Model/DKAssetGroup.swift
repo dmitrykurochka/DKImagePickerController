@@ -9,11 +9,11 @@
 import Photos
 
 // Group Model
-public class DKAssetGroup : NSObject {
+public class DKAssetGroup: NSObject {
 	public var groupId: String!
 	public var groupName: String!
 	public var totalCount: Int!
-	
+
 	public var originalCollection: PHAssetCollection!
 	public var fetchResult: PHFetchResult<PHAsset>!
 }

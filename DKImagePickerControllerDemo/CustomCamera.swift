@@ -11,11 +11,11 @@ import MobileCoreServices
 import DKImagePickerController_Practo
 
 open class CustomUIDelegate: DKImagePickerControllerDefaultUIDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-	
+
 	var didCancel: (() -> Void)?
 	var didFinishCapturingImage: ((_ image: UIImage) -> Void)?
 	var didFinishCapturingVideo: ((_ videoURL: URL) -> Void)?
-	
+
 	open override func imagePickerControllerCreateCamera(_ imagePickerController: DKImagePickerController,
 	                                                       didCancel: @escaping (() -> Void),
 	                                                       didFinishCapturingImage: @escaping ((_ image: UIImage) -> Void),
@@ -24,20 +24,20 @@ open class CustomUIDelegate: DKImagePickerControllerDefaultUIDelegate, UIImagePi
 		self.didCancel = didCancel
 		self.didFinishCapturingImage = didFinishCapturingImage
 		self.didFinishCapturingVideo = didFinishCapturingVideo
-		
+
 		let picker = UIImagePickerController()
 		picker.delegate = self
 		picker.sourceType = .camera
 		picker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
-		
+
 		return picker
 	}
-	
+
 	// MARK: - UIImagePickerControllerDelegate methods
-	
+
 	open func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 		let mediaType = info[UIImagePickerControllerMediaType] as! String
-		
+
 		if mediaType == kUTTypeImage as String {
 			let image = info[UIImagePickerControllerOriginalImage] as! UIImage
 			self.didFinishCapturingImage?(image)
@@ -46,9 +46,9 @@ open class CustomUIDelegate: DKImagePickerControllerDefaultUIDelegate, UIImagePi
 			self.didFinishCapturingVideo?(videoURL)
 		}
 	}
-	
+
 	open func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		self.didCancel?()
 	}
-	
+
 }

@@ -14,7 +14,6 @@ open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCont
 	open weak var imagePickerController: DKImagePickerController!
 	open weak var parentNavItem: UINavigationItem!
 
-
 	open lazy var doneButton: UIBarButtonItem = {
 		return self.createDoneButton()
 	}()
@@ -50,7 +49,6 @@ open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCont
 		self.parentNavItem = vc.navigationItem
 		updateDoneButtonTitle(self.doneButton)
 	}
-
 
 	open func imagePickerControllerCreateCamera(_ imagePickerController: DKImagePickerController,
 	                                            didCancel: @escaping (() -> Void),
@@ -106,9 +104,7 @@ open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCont
 
 		let messageString = imagePickerController.maxSelectedLocalizedMessage ?? String(format: DKImageLocalizedStringWithKey("maxLimitReachedMessage"), imagePickerController.maxSelectableCount)
 
-		let alert = UIAlertController(title: DKImageLocalizedStringWithKey("maxLimitReached")
-			, message:messageString
-			, preferredStyle: .alert)
+		let alert = UIAlertController(title: DKImageLocalizedStringWithKey("maxLimitReached"), message:messageString, preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: DKImageLocalizedStringWithKey("ok"), style: .cancel) { _ in })
 		imagePickerController.present(alert, animated: true) {}
 	}
