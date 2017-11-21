@@ -139,7 +139,7 @@ open class DKPopoverViewController: UIViewController {
         }, completion: nil)
     }
 
-    func dismissController() {
+    @objc func dismissController() {
         UIView.animate(withDuration: 0.2, animations: {
             self.popoverView.transform = self.popoverView.transform.translatedBy(x: 0, y: -(self.popoverView.bounds.height / 2)).scaledBy(x: 0.01, y: 0.01)
             self.view.backgroundColor = UIColor.clear

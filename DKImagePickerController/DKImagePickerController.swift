@@ -419,13 +419,13 @@ open class DKImagePickerController: UINavigationController {
 		 self.present(self.createCamera(), animated: shouldDisplayDismissAnimatedly, completion: nil)
 	}
 
-	public func dismissController() {
+	@objc public func dismissController() {
 		 self.presentingViewController?.dismiss(animated: shouldDisplayDismissAnimatedly, completion: {
 		 	self.didCancel?()
 		 })
 	}
 
-    public func done() {
+    @objc public func done() {
 		 self.presentingViewController?.dismiss(animated: shouldDisplayDismissAnimatedly, completion: {
 		 	self.didSelectAssets?(self.selectedAssets)
 		 })

@@ -1,9 +1,9 @@
 PODS:
-  - DKImagePickerController@Practo (3.5.0):
-    - DKImagePickerController@Practo/Camera (= 3.5.0)
-    - DKImagePickerController@Practo/ImageManager (= 3.5.0)
-  - DKImagePickerController@Practo/Camera (3.5.0)
-  - DKImagePickerController@Practo/ImageManager (3.5.0)
+  - DKImagePickerController@Practo (3.5.8):
+    - DKImagePickerController@Practo/Camera (= 3.5.8)
+    - DKImagePickerController@Practo/ImageManager (= 3.5.8)
+  - DKImagePickerController@Practo/Camera (3.5.8)
+  - DKImagePickerController@Practo/ImageManager (3.5.8)
 
 DEPENDENCIES:
   - DKImagePickerController@Practo (from `../DKImagePickerController`)
@@ -13,8 +13,8 @@ EXTERNAL SOURCES:
     :path: ../DKImagePickerController
 
 SPEC CHECKSUMS:
-  DKImagePickerController@Practo: 43edddec1f92037f8b86814d0f25e9e138b893d9
+  DKImagePickerController@Practo: e71a2786a7435f88b73007a6549e49636ab71822
 
 PODFILE CHECKSUM: f7e9b7d7e51cd54d73ed035d228c80f43aaa203f
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.3.1
