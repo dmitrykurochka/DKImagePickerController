@@ -1,6 +1,6 @@
 {
   "name": "DKImagePickerController@Practo",
-  "version": "3.5.8",
+  "version": "3.7.0",
   "summary": "It's a Facebook style Image Picker Controller in Swift3.",
   "homepage": "https://github.com/practo/DKImagePickerController",
   "license": {
@@ -15,7 +15,7 @@
   },
   "source": {
     "git": "https://github.com/practo/DKImagePickerController.git",
-    "tag": "3.5.8"
+    "tag": "3.7.0"
   },
   "source_files": "DKImagePickerController/**/*.{h,swift}",
   "resources": "DKImagePickerController/DKImagePickerController.bundle",
