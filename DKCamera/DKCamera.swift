@@ -150,7 +150,7 @@ open class DKCamera: UIViewController {
     }
 
     open func setupDevices() {
-        let devices = AVCaptureDevice.devices(for: AVMediaType.video) as! [AVCaptureDevice]
+        let devices = AVCaptureDevice.devices(for: AVMediaType.video)
 
         for device in devices {
             if device.position == .back {
@@ -405,7 +405,7 @@ open class DKCamera: UIViewController {
                 self.flashButton.isHidden = true
             }
 
-            for oldInput in self.captureSession.inputs as! [AVCaptureInput] {
+            for oldInput in self.captureSession.inputs {
                 self.captureSession.removeInput(oldInput)
             }
 
