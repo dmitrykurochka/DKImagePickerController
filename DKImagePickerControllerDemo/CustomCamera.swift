@@ -6,9 +6,9 @@
 //  Copyright © 2016年 ZhangAo. All rights reserved.
 //
 
-import UIKit
-import MobileCoreServices
 import DKImagePickerController_Practo
+import MobileCoreServices
+import UIKit
 
 open class CustomUIDelegate: DKImagePickerControllerDefaultUIDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -35,7 +35,7 @@ open class CustomUIDelegate: DKImagePickerControllerDefaultUIDelegate, UIImagePi
 
 	// MARK: - UIImagePickerControllerDelegate methods
 
-	open func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+	open func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
 		let mediaType = info[UIImagePickerControllerMediaType] as! String
 
 		if mediaType == kUTTypeImage as String {

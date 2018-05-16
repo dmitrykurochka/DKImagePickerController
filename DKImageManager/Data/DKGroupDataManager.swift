@@ -21,7 +21,7 @@ protocol DKGroupDataManagerObserver {
 public class DKGroupDataManager: DKBaseManager, PHPhotoLibraryChangeObserver {
 
     public var groupIds: [String]?
-	private var groups: [String : DKAssetGroup]?
+	private var groups: [String: DKAssetGroup]?
     private var assets = [String: DKAsset]()
 
 	public var assetGroupTypes: [PHAssetCollectionSubtype]?
@@ -47,10 +47,10 @@ public class DKGroupDataManager: DKBaseManager, PHPhotoLibraryChangeObserver {
 				return
 			}
 
-			var groups: [String : DKAssetGroup] = [:]
+			var groups: [String: DKAssetGroup] = [:]
 			var groupIds: [String] = []
 
-			for (_, groupType) in assetGroupTypes.enumerated() {
+			for groupType in assetGroupTypes {
                 let fetchResult = PHAssetCollection.fetchAssetCollections(with: self.collectionTypeForSubtype(groupType),
 				                                                                  subtype: groupType,
 				                                                                  options: nil)
@@ -83,7 +83,7 @@ public class DKGroupDataManager: DKBaseManager, PHPhotoLibraryChangeObserver {
 			return
 		}
 
-		let latestAsset = DKAsset(originalAsset:group.fetchResult.firstObject!)
+		let latestAsset = DKAsset(originalAsset: group.fetchResult.firstObject!)
 		latestAsset.fetchImageWithSize(size, options: options, completeBlock: completeBlock)
 	}
 
@@ -91,7 +91,7 @@ public class DKGroupDataManager: DKBaseManager, PHPhotoLibraryChangeObserver {
         let originalAsset = group.fetchResult[index]
         var asset = self.assets[originalAsset.localIdentifier]
         if asset == nil {
-            asset = DKAsset(originalAsset:originalAsset)
+            asset = DKAsset(originalAsset: originalAsset)
             self.assets[originalAsset.localIdentifier] = asset
         }
 		return asset!

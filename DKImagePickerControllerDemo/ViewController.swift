@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 ZhangAo. All rights reserved.
 //
 
-import UIKit
-import Photos
 import AVKit
 import DKImagePickerController_Practo
+import Photos
+import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 

@@ -124,12 +124,12 @@
 			buildConfigurationList = 9C35CC1E19DBB00700557269 /* Build configuration list for PBXNativeTarget "DKImagePickerControllerDemo" */;
 			buildPhases = (
 				812E37D06FB1E56FE08F762B /* [CP] Check Pods Manifest.lock */,
+				971E0FD120AC63E900472866 /* [Lint]: Swiftlint */,
 				9C35CBFB19DBB00700557269 /* Sources */,
 				9C35CBFC19DBB00700557269 /* Frameworks */,
 				9C35CBFD19DBB00700557269 /* Resources */,
 				B9EFB97F1D20FB7D006CDCAA /* Embed Frameworks */,
 				5A34E95FC25E658B07103739 /* [CP] Embed Pods Frameworks */,
-				1C6E1943D1968F6EAC46E3E1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -193,21 +193,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1C6E1943D1968F6EAC46E3E1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DKImagePickerControllerDemo/Pods-DKImagePickerControllerDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5A34E95FC25E658B07103739 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -243,6 +228,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		971E0FD120AC63E900472866 /* [Lint]: Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[Lint]: Swiftlint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint autocorrect;\n    swiftlint;\nelse\n    brew install swiftlint\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

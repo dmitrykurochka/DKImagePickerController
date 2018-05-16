@@ -121,7 +121,7 @@ class DKAssetGroupListVC: UITableViewController, DKGroupDataManagerObserver {
 
 	fileprivate var defaultAssetGroup: PHAssetCollectionSubtype?
 
-    fileprivate var selectedGroupDidChangeBlock:((_ group: String?)->Void)?
+    fileprivate var selectedGroupDidChangeBlock:((_ group: String?) -> Void)?
 
 	fileprivate lazy var groupThumbnailRequestOptions: PHImageRequestOptions = {
 		let options = PHImageRequestOptions()

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 ZhangAo. All rights reserved.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 @objc
 public protocol DKImagePickerControllerUIDelegate {
@@ -195,7 +195,7 @@ open class DKImagePickerController: UINavigationController {
     /// If sourceType is Camera will cause the assetType & maxSelectableCount & allowMultipleTypes & defaultSelectedAssets to be ignored.
     public var sourceType: DKImagePickerControllerSourceType = .both {
         didSet { /// If source type changed in the scenario of sharing instance, view controller should be reinitialized.
-            if(oldValue != sourceType) {
+            if oldValue != sourceType {
                 self.hasInitialized = false
             }
         }
@@ -218,7 +218,7 @@ open class DKImagePickerController: UINavigationController {
 	public var didCancel: (() -> Void)?
 	public var showsCancelButton = false {
 		didSet {
-			if let rootVC =  self.viewControllers.first {
+			if let rootVC = self.viewControllers.first {
 				self.updateCancelButtonForVC(rootVC)
 			}
 		}
@@ -364,11 +364,10 @@ open class DKImagePickerController: UINavigationController {
 
 		 let didFinishCapturingImage = { (image: UIImage) in
 		 	var newImageIdentifier: String!
-
              PHPhotoLibrary.shared().performChanges({
                  let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
                  newImageIdentifier = assetRequest.placeholderForCreatedAsset!.localIdentifier
-             }) { (success, _) in
+             }, completionHandler: { (success, _) in
                  DispatchQueue.main.async(execute: {
                      if success {
                          if let newAsset = PHAsset.fetchAssets(withLocalIdentifiers: [newImageIdentifier], options: nil).firstObject {
@@ -384,7 +383,7 @@ open class DKImagePickerController: UINavigationController {
                          self.selectImage(DKAsset(image: image))
                      }
                  })
-             }
+             })
 		 }
 
 		 let didFinishCapturingVideo = { (videoURL: URL) in
@@ -392,7 +391,7 @@ open class DKImagePickerController: UINavigationController {
 		 	PHPhotoLibrary.shared().performChanges({
 		 		let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoURL)
 		 		newVideoIdentifier = assetRequest?.placeholderForCreatedAsset?.localIdentifier
-		 	}) { (success, _) in
+		 	}, completionHandler: { (success, _) in
 		 		DispatchQueue.main.async(execute: {
 		 			if success {
 		 				if let newAsset = PHAsset.fetchAssets(withLocalIdentifiers: [newVideoIdentifier], options: nil).firstObject {
@@ -405,7 +404,7 @@ open class DKImagePickerController: UINavigationController {
 		 				self.dismiss(animated: true, completion: nil)
 		 			}
 		 		})
-		 	}
+		 	})
 		 }
 		 let camera = self.UIDelegate.imagePickerControllerCreateCamera(self,
 		                                                                didCancel: didCancel,

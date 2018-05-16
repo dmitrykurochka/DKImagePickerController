@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 ZhangAo. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
 import CoreMotion
+import UIKit
 
 open class DKCameraPassthroughView: UIView {
     open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -457,9 +457,9 @@ open class DKCamera: UIViewController {
             UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.1,
                                        options: UIViewAnimationOptions(), animations: { () -> Void in
                                         FocusView.focusView.transform = CGAffineTransform.identity.scaledBy(x: 0.6, y: 0.6)
-            }) { (_) -> Void in
+            }, completion: { (_) -> Void in
                 FocusView.focusView.removeFromSuperview()
-            }
+            })
         }
 
         if self.currentDevice == nil || self.currentDevice?.isFlashAvailable == false {
@@ -592,9 +592,9 @@ public extension UIDeviceOrientation {
         case .portraitUpsideDown:
             return CGFloat(Double.pi)
         case .landscapeRight:
-            return CGFloat(-Double.pi/2)
+            return CGFloat(-Double.pi / 2)
         case .landscapeLeft:
-            return CGFloat(Double.pi/2)
+            return CGFloat(Double.pi / 2)
         default:
             return 0
         }

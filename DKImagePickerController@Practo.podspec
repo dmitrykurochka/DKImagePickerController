@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.source        = { :git => "https://github.com/practo/DKImagePickerController.git", 
                      :tag => s.version.to_s }
   s.source_files  = "DKImagePickerController/**/*.{h,swift}"
-
+  s.swift_version = '4.1'
   s.resource      = "DKImagePickerController/DKImagePickerController.bundle"
   s.frameworks    = "Foundation", "UIKit", "Photos"
   s.requires_arc  = true

@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 ZhangAo. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
 import Photos
+import UIKit
 
 private let DKImageCameraIdentifier = "DKImageCameraIdentifier"
 private let DKImageAssetIdentifier = "DKImageAssetIdentifier"
@@ -327,7 +327,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 
 			let globalTitleColor = UINavigationBar.appearance().titleTextAttributes?[NSAttributedStringKey.foregroundColor] as? UIColor ?? UIColor.black
 
-			attributedTitle.addAttribute(NSAttributedStringKey.foregroundColor, value: globalTitleColor, range: NSMakeRange(0, attributedTitle.length))
+			attributedTitle.addAttribute(NSAttributedStringKey.foregroundColor, value: globalTitleColor, range: NSRange(location: 0, length: attributedTitle.length))
 			self.selectGroupButton.setAttributedTitle(attributedTitle, for: UIControlState())
 		} else {
 			self.selectGroupButton.setTitle(group.groupName + (groupsCount > 1 ? " \u{25be}" : "" ), for: UIControlState())
@@ -571,7 +571,7 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 	}
 
 	func group(_ groupId: String, didRemoveAssets assets: [DKAsset]) {
-		for (_, selectedAsset) in self.imagePickerController.selectedAssets.enumerated() {
+		for selectedAsset in self.imagePickerController.selectedAssets {
 			for removedAsset in assets {
 				if selectedAsset.isEqual(removedAsset) {
 					self.imagePickerController.deselectImage(selectedAsset)

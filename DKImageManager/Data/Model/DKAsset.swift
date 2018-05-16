@@ -48,7 +48,8 @@ open class DKAsset: NSObject {
 	}
 
 	private var image: UIImage?
-	internal init(image: UIImage) {
+
+    internal init(image: UIImage) {
         self.localIdentifier = String(image.hash)
 		super.init()
 
@@ -72,7 +73,7 @@ open class DKAsset: NSObject {
 	}
 
 	public func fetchImageWithSize(_ size: CGSize, options: PHImageRequestOptions?, contentMode: PHImageContentMode, completeBlock: @escaping (_ image: UIImage?, _ info: [AnyHashable: Any]?) -> Void) {
-		if let _ = self.originalAsset {
+		if self.originalAsset != nil {
 			getImageManager().fetchImageForAsset(self, size: size, options: options, contentMode: contentMode, completeBlock: completeBlock)
 		} else {
 			completeBlock(self.image, nil)
@@ -230,7 +231,7 @@ public extension AVAsset {
 			} else {
 				return 0
 			}
-		} else if let _ = self as? AVComposition {
+		} else if self is AVComposition {
 			var estimatedSize: Float = 0.0
 			var duration: Float = 0.0
 			for track in self.tracks {
