@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   
   s.name          = "DKImagePickerController@Practo"
-  s.version       = "3.7.0"
+  s.version       = "3.7.1"
   s.summary       = "It's a Facebook style Image Picker Controller in Swift3."
   s.homepage      = "https://github.com/practo/DKImagePickerController"
 
@@ -12,7 +12,9 @@ Pod::Spec.new do |s|
   s.source        = { :git => "https://github.com/practo/DKImagePickerController.git", 
                      :tag => s.version.to_s }
   s.source_files  = "DKImagePickerController/**/*.{h,swift}"
+  
   s.swift_version = '4.1'
+
   s.resource      = "DKImagePickerController/DKImagePickerController.bundle"
   s.frameworks    = "Foundation", "UIKit", "Photos"
   s.requires_arc  = true
