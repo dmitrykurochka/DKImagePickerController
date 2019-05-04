@@ -63,7 +63,7 @@ open class DKCamera: UIViewController {
     /// Determines whether or not the rotation is enabled.
     open var allowsRotate = false
 
-    open let captureSession = AVCaptureSession()
+    public let captureSession = AVCaptureSession()
     open var previewLayer: AVCaptureVideoPreviewLayer!
     fileprivate var beginZoomScale: CGFloat = 1.0
     fileprivate var zoomScale: CGFloat = 1.0
@@ -77,7 +77,7 @@ open class DKCamera: UIViewController {
 
     open var originalOrientation: UIDeviceOrientation!
     open var currentOrientation: UIDeviceOrientation!
-    open let motionManager = CMMotionManager()
+    public let motionManager = CMMotionManager()
 
     open lazy var flashButton: UIButton = {
         let flashButton = UIButton()
@@ -357,16 +357,15 @@ open class DKCamera: UIViewController {
         UserDefaults.standard.set(flashMode.rawValue, forKey: "DKCamera.flashMode")
     }
 
+    fileprivate struct FlashImage {
+        static let images = [
+            AVCaptureDevice.FlashMode.auto: DKCameraResource.cameraFlashAutoImage(),
+            AVCaptureDevice.FlashMode.on: DKCameraResource.cameraFlashOnImage(),
+            AVCaptureDevice.FlashMode.off: DKCameraResource.cameraFlashOffImage()
+        ]
+    }
+
     open func updateFlashButton() {
-        struct FlashImage {
-
-            static let images = [
-				AVCaptureDevice.FlashMode.auto: DKCameraResource.cameraFlashAutoImage(),
-				AVCaptureDevice.FlashMode.on: DKCameraResource.cameraFlashOnImage(),
-                AVCaptureDevice.FlashMode.off: DKCameraResource.cameraFlashOffImage()
-            ]
-
-        }
         let flashImage: UIImage = FlashImage.images[self.flashMode]!
 
         self.flashButton.setImage(flashImage, for: .normal)
@@ -437,31 +436,6 @@ open class DKCamera: UIViewController {
 
     open func focusAtTouchPoint(_ touchPoint: CGPoint) {
 
-        func showFocusViewAtPoint(_ touchPoint: CGPoint) {
-
-            struct FocusView {
-                static let focusView: UIView = {
-                    let focusView = UIView()
-                    let diameter: CGFloat = 100
-                    focusView.bounds.size = CGSize(width: diameter, height: diameter)
-                    focusView.layer.borderWidth = 2
-                    focusView.layer.cornerRadius = diameter / 2
-                    focusView.layer.borderColor = UIColor.white.cgColor
-
-                    return focusView
-                }()
-            }
-            FocusView.focusView.transform = CGAffineTransform.identity
-            FocusView.focusView.center = touchPoint
-            self.view.addSubview(FocusView.focusView)
-            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.1,
-                                       options: UIViewAnimationOptions(), animations: { () -> Void in
-                                        FocusView.focusView.transform = CGAffineTransform.identity.scaledBy(x: 0.6, y: 0.6)
-            }, completion: { (_) -> Void in
-                FocusView.focusView.removeFromSuperview()
-            })
-        }
-
         if self.currentDevice == nil || self.currentDevice?.isFlashAvailable == false {
             return
         }
@@ -484,6 +458,32 @@ open class DKCamera: UIViewController {
             currentDevice.unlockForConfiguration()
         }
 
+    }
+
+    fileprivate struct FocusView {
+        static let focusView: UIView = {
+            let focusView = UIView()
+            let diameter: CGFloat = 100
+            focusView.bounds.size = CGSize(width: diameter, height: diameter)
+            focusView.layer.borderWidth = 2
+            focusView.layer.cornerRadius = diameter / 2
+            focusView.layer.borderColor = UIColor.white.cgColor
+
+            return focusView
+        }()
+    }
+
+    fileprivate func showFocusViewAtPoint(_ touchPoint: CGPoint) {
+
+        FocusView.focusView.transform = CGAffineTransform.identity
+        FocusView.focusView.center = touchPoint
+        self.view.addSubview(FocusView.focusView)
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1.1,
+                       options: [], animations: { () -> Void in
+                        FocusView.focusView.transform = CGAffineTransform.identity.scaledBy(x: 0.6, y: 0.6)
+        }, completion: { (_) -> Void in
+            FocusView.focusView.removeFromSuperview()
+        })
     }
 
     // MARK: - Handles Orientation
@@ -511,7 +511,7 @@ open class DKCamera: UIViewController {
             var contentViewNewSize: CGSize!
             let width = self.view.bounds.width
             let height = self.view.bounds.height
-            if UIDeviceOrientationIsLandscape(self.currentOrientation) {
+            if self.currentOrientation.isLandscape {
                 contentViewNewSize = CGSize(width: max(width, height), height: min(width, height))
             } else {
                 contentViewNewSize = CGSize(width: min(width, height), height: max(width, height))

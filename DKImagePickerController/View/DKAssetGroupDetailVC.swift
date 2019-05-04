@@ -65,41 +65,41 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 
     } /* DKImageCameraCell */
 
+    class DKImageCheckView: UIView {
+
+        internal lazy var checkImageView: UIImageView = {
+            let imageView = UIImageView(image: DKImageResource.checkedImage().withRenderingMode(.alwaysTemplate))
+            return imageView
+        }()
+
+        internal lazy var checkLabel: UILabel = {
+            let label = UILabel()
+            label.textAlignment = .right
+
+            return label
+        }()
+
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+
+            self.addSubview(checkImageView)
+            self.addSubview(checkLabel)
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+        override func layoutSubviews() {
+            super.layoutSubviews()
+
+            self.checkImageView.frame = self.bounds
+            self.checkLabel.frame = CGRect(x: 0, y: 5, width: self.bounds.width - 5, height: 20)
+        }
+
+    } /* DKImageCheckView */
+
     class DKAssetCell: UICollectionViewCell {
-
-        class DKImageCheckView: UIView {
-
-            internal lazy var checkImageView: UIImageView = {
-                let imageView = UIImageView(image: DKImageResource.checkedImage().withRenderingMode(.alwaysTemplate))
-                return imageView
-            }()
-
-            internal lazy var checkLabel: UILabel = {
-                let label = UILabel()
-                label.textAlignment = .right
-
-                return label
-            }()
-
-            override init(frame: CGRect) {
-                super.init(frame: frame)
-
-                self.addSubview(checkImageView)
-                self.addSubview(checkLabel)
-            }
-
-            required init?(coder aDecoder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-            }
-
-            override func layoutSubviews() {
-                super.layoutSubviews()
-
-                self.checkImageView.frame = self.bounds
-                self.checkLabel.frame = CGRect(x: 0, y: 5, width: self.bounds.width - 5, height: 20)
-            }
-
-        } /* DKImageCheckView */
 
         weak var asset: DKAsset!
 
@@ -201,10 +201,10 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
     fileprivate lazy var selectGroupButton: UIButton = {
         let button = UIButton()
 
-		let globalTitleColor = UINavigationBar.appearance().titleTextAttributes?[NSAttributedStringKey.foregroundColor] as? UIColor
+        let globalTitleColor = UINavigationBar.appearance().titleTextAttributes?[NSAttributedString.Key.foregroundColor] as? UIColor
 		button.setTitleColor(globalTitleColor ?? UIColor.black, for: .normal)
 
-		let globalTitleFont = UINavigationBar.appearance().titleTextAttributes?[NSAttributedStringKey.font] as? UIFont
+        let globalTitleFont = UINavigationBar.appearance().titleTextAttributes?[NSAttributedString.Key.font] as? UIFont
 		button.titleLabel!.font = globalTitleFont ?? UIFont.boldSystemFont(ofSize: 18.0)
 
 		button.addTarget(self, action: #selector(DKAssetGroupDetailVC.showGroupSelector), for: .touchUpInside)
@@ -325,12 +325,12 @@ internal class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate,
 
 			let attributedTitle = NSMutableAttributedString(attributedString: attrTitle)
 
-			let globalTitleColor = UINavigationBar.appearance().titleTextAttributes?[NSAttributedStringKey.foregroundColor] as? UIColor ?? UIColor.black
+            let globalTitleColor = UINavigationBar.appearance().titleTextAttributes?[NSAttributedString.Key.foregroundColor] as? UIColor ?? UIColor.black
 
-			attributedTitle.addAttribute(NSAttributedStringKey.foregroundColor, value: globalTitleColor, range: NSRange(location: 0, length: attributedTitle.length))
-			self.selectGroupButton.setAttributedTitle(attributedTitle, for: UIControlState())
+            attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: globalTitleColor, range: NSRange(location: 0, length: attributedTitle.length))
+            self.selectGroupButton.setAttributedTitle(attributedTitle, for: UIControl.State.normal)
 		} else {
-			self.selectGroupButton.setTitle(group.groupName + (groupsCount > 1 ? " \u{25be}" : "" ), for: UIControlState())
+            self.selectGroupButton.setTitle(group.groupName + (groupsCount > 1 ? " \u{25be}" : "" ), for: UIControl.State.normal)
 			if let font = self.imagePickerController.fontForGroup {
 				self.selectGroupButton.titleLabel?.font = font
 			}
