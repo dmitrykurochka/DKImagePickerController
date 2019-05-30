@@ -124,9 +124,11 @@ public enum DKImagePickerControllerSourceType: Int {
  */
 open class DKImagePickerController: UINavigationController {
 
+    //swiftlint:disable weak_delegate
 	lazy public var UIDelegate: DKImagePickerControllerUIDelegate = {
 		return DKImagePickerControllerDefaultUIDelegate()
 	}()
+    //swiftlint:enable weak_delegate
 
 	public static var configureGroupNameSelectorTitleLabel: ((UILabel) -> Void)?
 	public static var configureGroupNameSelectorCountLabel: ((UILabel) -> Void)?

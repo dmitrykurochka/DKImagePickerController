@@ -27,7 +27,7 @@ open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCont
 	}
 
 	open func createDoneButton() -> UIBarButtonItem {
-		let button = UIBarButtonItem(title: nil, style: UIBarButtonItemStyle.done, target: self.imagePickerController, action: #selector(DKImagePickerController.done))
+        let button = UIBarButtonItem(title: nil, style: UIBarButtonItem.Style.done, target: self.imagePickerController, action: #selector(DKImagePickerController.done))
 		self.updateDoneButtonTitle(button)
 		return button
 	}

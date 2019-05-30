@@ -19,13 +19,13 @@ open class DKPopoverViewController: UIViewController {
         popoverViewController.fromView = fromView
 
         popoverViewController.showInView(window)
-        window.rootViewController!.addChildViewController(popoverViewController)
+        window.rootViewController!.addChild(popoverViewController)
     }
 
     open class func dismissPopoverViewController() {
         let window = UIApplication.shared.keyWindow!
 
-        for vc in window.rootViewController!.childViewControllers {
+        for vc in window.rootViewController!.children {
             if let controller = vc as? DKPopoverViewController {
                 controller.dismissController()
             }
@@ -101,6 +101,7 @@ open class DKPopoverViewController: UIViewController {
     var fromView: UIView!
     private let popoverView = DKPopoverView()
 
+    //swiftlint:disable prohibited_super_call
     override open func loadView() {
         super.loadView()
 
@@ -110,6 +111,7 @@ open class DKPopoverViewController: UIViewController {
         backgroundView.autoresizingMask = self.view.autoresizingMask
         self.view = backgroundView
     }
+    //swiftlint:enable prohibited_super_call
 
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -145,7 +147,7 @@ open class DKPopoverViewController: UIViewController {
             self.view.backgroundColor = UIColor.clear
         }, completion: { _ in
             self.view.removeFromSuperview()
-            self.removeFromParentViewController()
+            self.removeFromParent()
         })
     }
 
@@ -153,7 +155,7 @@ open class DKPopoverViewController: UIViewController {
 		let popoverY = self.fromView.convert(self.fromView.frame.origin, to: self.view).y + self.fromView.bounds.height
 
 		var popoverWidth = self.contentViewController.preferredContentSize.width
-		if popoverWidth == UIViewNoIntrinsicMetric {
+        if popoverWidth == UIView.noIntrinsicMetric {
 			if UI_USER_INTERFACE_IDIOM() == .pad {
 				popoverWidth = self.view.bounds.width * 0.6
 			} else {

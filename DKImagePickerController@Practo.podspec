@@ -7,13 +7,12 @@ Pod::Spec.new do |s|
 
   s.license       = { :type => "MIT", :file => "LICENSE" }
   s.author        = { "Sambhav Shah" => "sambhav.shah@practo.com" }
-  s.platform      = :ios, "8.0"
 
-  s.source        = { :git => "https://github.com/practo/DKImagePickerController.git", 
-                     :tag => s.version.to_s }
+  s.source        = { :git => "https://github.com/practo/DKImagePickerController.git", :tag => s.version.to_s }
   s.source_files  = "DKImagePickerController/**/*.{h,swift}"
   
-  s.swift_version = '4.1'
+  s.ios.deployment_target = '10.0'
+  s.swift_version = '5.0'
 
   s.resource      = "DKImagePickerController/DKImagePickerController.bundle"
   s.frameworks    = "Foundation", "UIKit", "Photos"

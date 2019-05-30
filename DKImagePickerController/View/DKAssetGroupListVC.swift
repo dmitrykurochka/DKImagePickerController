@@ -74,7 +74,7 @@ class DKAssetGroupCell: UITableViewCell {
         return separator
     }()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         self.selectedBackgroundView = self.customSelectedBackgroundView
@@ -134,7 +134,7 @@ class DKAssetGroupListVC: UITableViewController, DKGroupDataManagerObserver {
     override var preferredContentSize: CGSize {
         get {
             if let groups = self.groups {
-                return CGSize(width: UIViewNoIntrinsicMetric, height: CGFloat(groups.count) * self.tableView.rowHeight)
+                return CGSize(width: UIView.noIntrinsicMetric, height: CGFloat(groups.count) * self.tableView.rowHeight)
             } else {
                 return super.preferredContentSize
             }
