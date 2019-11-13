@@ -143,9 +143,21 @@ open class DKImagePickerControllerDefaultUIDelegate: NSObject, DKImagePickerCont
 			}
 		}
 
-		func setup() {
-			camera.cameraOverlayView = nil
-		}
+    func setup() {
+        OperationQueue.main.addOperation {
+            if camera.captureSession.inputs.isEmpty {
+              camera.stopSession()
+              camera.setupDevices()
+              camera.beginSession()
+              camera.setupMotionManager()
+              if !camera.captureSession.isRunning {
+                  camera.captureSession.startRunning()
+              }
+              camera.initialOriginalOrientationForOrientation()
+            }
+            camera.cameraOverlayView = nil
+        }
+    }
 
 		DKCamera.checkCameraPermission { granted in
 			granted ? setup() : cameraDenied()

@@ -260,7 +260,7 @@ open class DKImagePickerController: UINavigationController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-		getImageManager().invalidate()
+        getImageManager().invalidate()
     }
 
     override open func viewDidLoad() {

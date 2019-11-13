@@ -85,8 +85,8 @@ public class DKImageManager: DKBaseManager {
     }()
 
 	public func invalidate() {
-		self.groupDataManager.invalidate()
-        self.groupDataManager = nil
+      self.groupDataManager.invalidate()
+//        self.groupDataManager = nil
 	}
 
 	public func fetchImageForAsset(_ asset: DKAsset, size: CGSize, completeBlock: @escaping (_ image: UIImage?, _ info: [AnyHashable: Any]?) -> Void) {

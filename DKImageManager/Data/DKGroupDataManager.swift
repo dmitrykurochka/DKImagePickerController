@@ -34,7 +34,7 @@ public class DKGroupDataManager: DKBaseManager, PHPhotoLibraryChangeObserver {
 
 	public func invalidate() {
 		self.groupIds?.removeAll()
-        self.groups?.removeAll()
+        self.groups = nil
         self.assets.removeAll()
 
 		PHPhotoLibrary.shared().unregisterChangeObserver(self)
@@ -42,7 +42,7 @@ public class DKGroupDataManager: DKBaseManager, PHPhotoLibraryChangeObserver {
 
 	public func fetchGroups(_ completeBlock: (_ groups: [String]?, _ error: NSError?) -> Void) {
 		if let assetGroupTypes = self.assetGroupTypes {
-			if self.groups != nil {
+      if self.groups != nil {
 				completeBlock(self.groupIds, nil)
 				return
 			}

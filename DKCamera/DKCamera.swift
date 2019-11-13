@@ -38,6 +38,7 @@ open class DKCamera: UIViewController {
 
     open var didCancel: (() -> Void)?
     open var didFinishCapturingImage: ((_ image: UIImage) -> Void)?
+    fileprivate var isStopped = false
 
     open var cameraOverlayView: UIView? {
         didSet {
@@ -374,6 +375,22 @@ open class DKCamera: UIViewController {
 
     // MARK: - Capture Session
 
+    open func stopSession() {
+        self.pauseSession()
+        self.captureSession.stopRunning()
+    }
+    open func pauseSession() {
+        self.isStopped = true
+        self.updateSession(isEnable: false)
+    }
+
+    open func updateSession(isEnable: Bool) {
+        if ((!self.isStopped) || (self.isStopped && !isEnable)),
+            let connection = self.previewLayer.connection {
+            connection.isEnabled = isEnable
+        }
+    }
+
     open func beginSession() {
 		self.captureSession.sessionPreset = AVCaptureSession.Preset.photo
 
@@ -386,7 +403,7 @@ open class DKCamera: UIViewController {
         }
 
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
-		self.previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        self.previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         self.previewLayer.frame = self.view.bounds
 
         let rootLayer = self.view.layer
@@ -409,7 +426,7 @@ open class DKCamera: UIViewController {
             }
 
             if let frontInput = try? AVCaptureDeviceInput(device: currentDevice),
-				self.captureSession.canAddInput(frontInput) {
+            self.captureSession.canAddInput(frontInput) {
                 self.captureSession.addInput(frontInput)
             }
 
